@@ -1,43 +1,170 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <link rel="Stylesheet" type="text/css" href="/MyWiki/static/css/style.css">
-    <link rel="Stylesheet" type="text/css" href="/MyWiki/static/css/tango.css">
-    <link rel="shortcut icon" href="/MyWiki/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/MyWiki/favicon.ico" type="image/x-icon">
-    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
-    <title>Ruter's Knowledge Wiki</title>
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="zh-CN"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="zh-CN"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="zh-CN"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="zh-CN"> <!--<![endif]-->
+<head>
+	<!-- META TAGS -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ruter's Knowledge Wiki</title>
     <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
     <meta name="description" content="It's a knowledge management wiki."/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
+    <link rel="shortcut icon" href="/MyWiki/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/MyWiki/favicon.ico" type="image/x-icon">
 
-  <body>
-    <div id="container">
-      
-<div class="title">Ruter's Knowledge Wiki</div>
+    <!-- Style Sheet-->
+    <link rel='stylesheet' id='bootstrap-css-css'  href='/MyWiki/static/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='responsive-css-css'  href='/MyWiki/static/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='main-css-css'  href='/MyWiki/static/css/main5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel="Stylesheet" type="text/css" href="/MyWiki/static/css/monokai.css">
+    <!-- <link rel='stylesheet' id='custom-css-css'  href='/MyWiki/static/css/custom5152.html?ver=1.0' type='text/css' media='all' /> -->
 
-<div class="index">    
-    <div class="category">
-      <h2 id="intro">Intro
-      </h2>
-      <div class="category_pages">
-        <ul>
-          <li class="pagelist">  
-              <a href="./intro/gettingstarted.html">Getting Started</a>
-          </li>
-        </ul>
-      </div> <!-- end category_pages -->
-    </div> <!-- end category -->
-    <div class="clearfix"></div>
-</div>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+     <script src="js/html5.js"></script></script>
+    <![endif]-->
+</head>
+<body>
+	<!-- Start of Header -->
+	<div class="header-wrapper">
+        <header>
+            <div class="container">
+                <div class="logo-container">
+                    <!-- Website Logo -->
+                    <a href="/MyWiki"  title="Ruter's Knowledge Wiki">
+                            <img src="images/logo.png" alt="Ruter's Knowledge Wiki">
+                    </a>
+                    <span class="tag-line">My personal knowledge management</span>
+                </div>
+                <!-- Start of Main Navigation -->
+                <nav class="main-nav">
+                    <div class="menu-top-menu-container">
+                        <ul id="menu-top-menu" class="clearfix">
+                            <li><a href="/MyWiki">Home</a></li>
+                            <li><a href="http://ruter.sundaystart.net">Blog</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End of Main Navigation -->
+            </div>
+        </header>
+	</div>
+	<!-- End of Header -->
+
+	<!-- Start of Search Wrapper -->
+	<div class="search-area-wrapper">
+        <div class="search-area container">
+            <h3 class="search-header">Have a Question?</h3>
+            <p class="search-tag-line">If you have any question you can enter what you are looking for!</p>
+
+            <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+                    <input class="search-term required" type="text" id="s" name="s" placeholder="Type your search terms here" title="* Please enter a search term!" />
+                    <input class="search-btn" type="submit" value="Search" />
+                    <div id="search-error-container"></div>
+            </form>
+        </div>
+	</div>
+	<!-- End of Search Wrapper -->
+
+	<!-- Start of Page Container -->
+    <div class="page-container">
+        <div class="container">
+            <div class="row">
+            	<!-- start of page content -->
+                <div class="span8 page-content">
+                	
+	
+		 
+	<div class="row home-listing-area">
+	    <div class="span8">
+	        <h2>
+	        Intro
+	        </h2>
+	    </div>
+	</div>
+
+	
+		
+	
+
+	<div class="row separator">
+	    <section class="span8 articles-list">
+            <ul class="articles">
+	            
+					 
+	                    <li class="span3 article-entry standard">
+	                        <h4><a href="./intro/gettingstarted.html">Getting Started</a></h4>
+	                        <span class="article-meta">
+	                            2099-06-02 00:00
+	                            
+	        				</span>
+	                        <span class="like-count">66</span>
+	                    </li>
+	                
+	            
+            </ul>
+	    </section>
+	</div>
+
+	
+
+                </div>
+                <!-- end of page content -->
+
+                <!-- start of sidebar -->
+                <aside class="span4 page-sidebar">
+                	<section class="widget">
+                        <div class="support-widget">
+                            <h3 class="title">Support</h3>
+                            <p class="intro">Need support? If you did not found an answer, contact me for further help.</p>
+                        </div>
+                	</section>
+                </aside>
+                <!-- end of sidebar -->
+            </div>
+        </div>
     </div>
-    <div id="footer">
-      <span>
-        <p>Copyright © 2016 Ruter.
-        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
-        <p>Site Generated 2016-10-31 00:54:38</p>
-      </span>
-    </div>
-  </body>
+    <!-- End of Page Container -->
+
+    <!-- Start of Footer -->
+    <footer id="footer-wrapper">
+        <!-- Footer Bottom -->
+        <div id="footer-bottom-wrapper">
+            <div id="footer-bottom" class="container">
+                <div class="row">
+                    <div class="span6">
+                        <p class="copyright">
+                            Copyright © 2016 Ruter. Site Generated 2016-10-31 19:33:51
+                        </p>
+                    </div>
+                    <div class="span6">
+                        <!-- Social Navigation -->
+                        <ul class="social-nav clearfix">
+                                <li class="linkedin"><a target="_blank" href="#"></a></li>
+                                <li class="stumble"><a target="_blank" href="#"></a></li>
+                                <li class="google"><a target="_blank" href="#"></a></li>
+                                <li class="deviantart"><a target="_blank" href="#"></a></li>
+                                <li class="flickr"><a target="_blank" href="#"></a></li>
+                                <li class="skype"><a target="_blank" href="skype:#?call"></a></li>
+                                <li class="rss"><a target="_blank" href="#"></a></li>
+                                <li class="twitter"><a target="_blank" href="#"></a></li>
+                                <li class="facebook"><a target="_blank" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Footer Bottom -->
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- script -->
+    <!-- <script type='text/javascript' src='/MyWiki/static/js/jquery-1.8.3.min.js'></script>
+    <script type='text/javascript' src='/MyWiki/static/js/jquery.easing.1.3.js'></script>
+    <script type='text/javascript' src='/MyWiki/static/js/jquery.liveSearch.js'></script>
+    <script type='text/javascript' src='/MyWiki/static/js/jquery.form.js'></script>
+    <script type='text/javascript' src='/MyWiki/static/js/jquery.validate.min.js'></script> -->
+</body>
 </html>
