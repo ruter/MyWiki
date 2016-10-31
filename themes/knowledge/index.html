@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site.title }}{% endblock %}
+
+{% block content %}
+	{% for category in pages %}
+		{% include "list.html" %}
+	{% endfor %}
+{% endblock %}

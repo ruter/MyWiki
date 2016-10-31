@@ -1,0 +1,56 @@
+{% if site.default_ext not in category %} {# is category #}
+	<div class="row home-listing-area">
+	    <div class="span8">
+	        <h2>
+	        {% if 'label' in category %}{{ category.label }}
+	        {% else %}{{ category.name|capitalize }}{% endif %}
+	        </h2>
+	    </div>
+	</div>
+
+	{% for page in category.pages %}
+		{% if 'pages' in page %} {# is collection #}
+	    	{% set coll = page %}
+			<div class="row separator">
+			    <section class="span8 articles-list">
+		            <h3>{{ coll.name }}</h3>
+		            <ul class="articles">
+		            	{% for coll_page in coll.pages %}
+		                    <li class="span3 article-entry standard">
+	                            <h4><a href="./{{ category.name }}/{{ coll_page.name }}.html">{{ coll_page.title }}</a></h4>
+	                            <span class="article-meta">
+		                            {{ coll_page.date }}
+		                            {% if 'description' in coll_page %}
+	                					&nbsp;{{ coll_page.description }}
+	                				{% endif %}
+	            				</span>
+	                            <span class="like-count">66</span>
+		                    </li>
+		                {% endfor %}
+		            </ul>
+			    </section>
+			</div>
+		{% endif %}
+	{% endfor %}
+
+	<div class="row separator">
+	    <section class="span8 articles-list">
+            <ul class="articles">
+	            {% for page in category.pages %}
+					{% if site.default_ext in page.fname %} {# is page #}
+	                    <li class="span3 article-entry standard">
+	                        <h4><a href="./{{ category.name }}/{{ page.name }}.html">{{ page.title }}</a></h4>
+	                        <span class="article-meta">
+	                            {{ page.date }}
+	                            {% if 'description' in page %}
+	            					&nbsp;{{ page.description }}
+	            				{% endif %}
+	        				</span>
+	                        <span class="like-count">66</span>
+	                    </li>
+	                {% endif %}
+	            {% endfor %}
+            </ul>
+	    </section>
+	</div>
+{% endif %}

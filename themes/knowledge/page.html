@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ site.title }}{% endblock %}
+
+{% block content %}
+	<ul class="breadcrumb">
+		<li><a href="{{ site.root }}">Home</a><span class="divider">/</span></li>
+		{% if page.category %}
+	        {% for c in page.category.split("/") %}
+		        {% if loop.first %}
+		        	{% set id = c %}
+		        {% else %}
+		        	{% set id = id ~ "-" ~ c %}
+		        {% endif %}
+		        <li><a href="{{ site.root }}/#{{ id }}">{{ c }}</a> <span class="divider">/</span></li>
+	        {% endfor %}
+	    {% endif %}
+      	<li class="active">{{ page.title }}</li>
+	</ul>
+
+	<article class=" type-post format-standard hentry clearfix">
+        <h1 class="post-title">{{ page.title }}</h1>
+
+        <div class="post-meta clearfix">
+                <span class="date">{{ page.date }}</span>
+                {% if page.updated %}
+                	Updated: <span class="date">{{ page.updated }}</span>
+                {% endif %}
+        </div><!-- end of post meta -->
+
+        {{ page.content }}
+	</article>
+
+	{% if page.relation %}
+	<div class="like-btn">
+	    <span class="tags">
+            <strong>Related:&nbsp;&nbsp;</strong>
+            {% for r in page.relation %}
+            	<a href="{{ site.root }}/{{ r.category }}/{{ r.filename }}" rel="tag">{{ r.title }}</a>{% if not loop.last %}, {% endif %}
+            {% endfor %}
+	    </span>
+	</div>
+	{% endif %}
+{% endblock %}
