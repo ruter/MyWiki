@@ -7,7 +7,7 @@
 	<!-- META TAGS -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Ruter's Knowledge Wiki</title>
+	<title>CentOS端口操作 - Ruter's Knowledge Wiki</title>
     <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
     <meta name="description" content="It's a knowledge management wiki."/>
     <link rel="shortcut icon" href="/MyWiki/static/images/favicon.ico" type="image/x-icon">
@@ -75,81 +75,76 @@
             	<!-- start of page content -->
                 <div class="span8 page-content">
                 	
-	
-		 
-	<div class="row home-listing-area">
-	    <div class="span8">
-	        <h2>
-	        Linux
-	        </h2>
-	    </div>
-	</div>
-
-	
+	<ul class="breadcrumb">
+		<li><a href="/MyWiki">Home</a><span class="divider">/</span></li>
 		
-	
+	        
+		        
+		        	
+		        
+		        <li><a href="/MyWiki/#linux">linux</a> <span class="divider">/</span></li>
+	        
+	    
+      	<li class="active">CentOS端口操作</li>
+	</ul>
 
-	<div class="row separator">
-	    <section class="span8 articles-list">
-            <ul class="articles">
-	            
-					 
-	                    <li class="span3 article-entry standard">
-	                        <h4><a href="./linux/centos端口操作.html">CentOS端口操作</a></h4>
-	                        <span class="article-meta">
-	                            2016-11-01 15:55
-	                            
-	        				</span>
-	                    </li>
-	                
-	            
-            </ul>
-	    </section>
-	</div>
+	<article class=" type-post format-standard hentry clearfix">
+        <h1 class="post-title">CentOS端口操作</h1>
 
-	
-		 
-	<div class="row home-listing-area">
-	    <div class="span8">
-	        <h2>
-	        Tool
-	        </h2>
-	    </div>
-	</div>
+        <div class="post-meta clearfix">
+                <span class="date">2016-11-01 15:55</span>
+                
+        </div><!-- end of post meta -->
 
-	
-		
-	
-		
-	
+        <h1 id="centos-6">CentOS 6</h1>
+<p>查看当前所有的<code>iptables</code>配置</p>
+<div class="hlcode"><pre><span class="n">iptables</span> <span class="o">-</span><span class="n">L</span> <span class="o">-</span><span class="n">n</span>
+</pre></div>
 
-	<div class="row separator">
-	    <section class="span8 articles-list">
-            <ul class="articles">
-	            
-					 
-	                    <li class="span3 article-entry standard">
-	                        <h4><a href="./tool/simiki.html">Simiki</a></h4>
-	                        <span class="article-meta">
-	                            2016-11-01 10:12
-	                            
-	        				</span>
-	                    </li>
-	                
-	            
-					 
-	                    <li class="span3 article-entry standard">
-	                        <h4><a href="./tool/常用软件.html">常用软件</a></h4>
-	                        <span class="article-meta">
-	                            2016-11-01 13:42
-	                            
-	        				</span>
-	                    </li>
-	                
-	            
-            </ul>
-	    </section>
-	</div>
+
+<p>添加允许<code>INPUT</code>访问规则，如果需要拒绝访问，将<code>ACCEPT</code>改为<code>DROP</code>即可</p>
+<div class="hlcode"><pre><span class="cp"># HTTP</span>
+<span class="n">iptables</span> <span class="o">-</span><span class="n">A</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="o">--</span><span class="n">dport</span> <span class="mi">80</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
+<span class="n">iptables</span> <span class="o">-</span><span class="n">A</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="o">--</span><span class="n">dport</span> <span class="mi">8080</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
+
+<span class="cp"># 打开一个范围的端口</span>
+<span class="n">iptables</span> <span class="o">-</span><span class="n">A</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="o">--</span><span class="n">dport</span> <span class="mi">9000</span><span class="o">:</span><span class="mi">9009</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
+</pre></div>
+
+
+<p>保存<code>iptables</code>的设置</p>
+<div class="hlcode"><pre><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">rc</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">save</span>
+</pre></div>
+
+
+<p>开启、停止、状态、重启</p>
+<div class="hlcode"><pre><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">start</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">stop</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">status</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">restart</span> <span class="err">#</span> <span class="err">或者</span> <span class="n">service</span> <span class="n">iptables</span> <span class="n">restart</span>
+</pre></div>
+
+
+<h1 id="centos-7">CentOS 7</h1>
+<p>CentOS 7使用<code>firewalld</code>代替了原来的<code>iptables</code>，相关端口命令如下</p>
+<p>开启端口</p>
+<div class="hlcode"><pre><span class="n">firewall</span><span class="o">-</span><span class="n">cmd</span> <span class="o">--</span><span class="n">zone</span><span class="o">=</span><span class="n">public</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span> <span class="o">--</span><span class="n">permanent</span>
+</pre></div>
+
+
+<p>含义</p>
+<div class="hlcode"><pre><span class="o">--</span><span class="n">zone</span> <span class="err">#作用域</span>
+
+<span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span> <span class="err">#添加端口，格式为：端口</span><span class="o">/</span><span class="err">通讯协议</span>
+
+<span class="o">--</span><span class="n">permanent</span> <span class="err">#永久生效，没有此参数重启后失效</span>
+</pre></div>
+
+
+<p>重启防火墙</p>
+<div class="hlcode"><pre><span class="n">firewall</span><span class="o">-</span><span class="n">cmd</span> <span class="o">--</span><span class="n">reload</span>
+</pre></div>
+	</article>
 
 	
 
