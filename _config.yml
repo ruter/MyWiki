@@ -11,7 +11,3 @@ root: /MyWiki
 
 theme: knowledge
 
-deploy:
-  - type: git
-    remote: 
-    branch: 
