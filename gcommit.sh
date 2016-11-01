@@ -2,8 +2,6 @@
 
 msg=$1
 
-simiki g
-cd output
 git add .
 
 if [[ $msg == '' ]]; then
@@ -12,4 +10,4 @@ else
 	git commit -m $msg
 fi
 
-git push origin gh-pages
+git push origin master
