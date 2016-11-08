@@ -7,7 +7,7 @@
 	<!-- META TAGS -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Ruter's Knowledge Wiki</title>
+	<title>Flask中文编码 - Ruter's Knowledge Wiki</title>
     <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
     <meta name="description" content="It's a knowledge management wiki."/>
     <link rel="shortcut icon" href="/MyWiki/static/images/favicon.ico" type="image/x-icon">
@@ -75,113 +75,35 @@
             	<!-- start of page content -->
                 <div class="span8 page-content">
                 	
-	
-		 
-	<div class="row home-listing-area">
-	    <div class="span8">
-	        <h2>
-	        Linux
-	        </h2>
-	    </div>
-	</div>
-
-	
+	<ul class="breadcrumb">
+		<li><a href="/MyWiki">Home</a><span class="divider">/</span></li>
 		
-	
+	        
+		        
+		        	
+		        
+		        <li><a href="/MyWiki/#python">python</a> <span class="divider">/</span></li>
+	        
+	    
+      	<li class="active">Flask中文编码</li>
+	</ul>
 
-	<div class="row separator">
-	    <section class="span8 articles-list">
-            <ul class="articles">
-	            
-					 
-	                    <li class="span3 article-entry standard">
-	                        <h4><a href="./linux/centos端口操作.html">CentOS端口操作</a></h4>
-	                        <span class="article-meta">
-	                            2016-11-01 15:55
-	                            
-	        				</span>
-	                    </li>
-	                
-	            
-            </ul>
-	    </section>
-	</div>
+	<article class=" type-post format-standard hentry clearfix">
+        <h1 class="post-title">Flask中文编码</h1>
 
-	
-		 
-	<div class="row home-listing-area">
-	    <div class="span8">
-	        <h2>
-	        Python
-	        </h2>
-	    </div>
-	</div>
+        <div class="post-meta clearfix">
+                <span class="date">2016-11-08 13:51</span>
+                
+        </div><!-- end of post meta -->
 
-	
-		
-	
+        <p>使用<code>Flask</code>编写API时，返回的<code>json</code>里如果有中文会遇到编码的问题，可以用如下方法解决:</p>
+<div class="hlcode"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">json</span><span class="p">,</span> <span class="n">make_response</span>
+<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s">&#39;result&#39;</span><span class="p">:</span> <span class="n">get_entry_list</span><span class="p">()},</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
 
-	<div class="row separator">
-	    <section class="span8 articles-list">
-            <ul class="articles">
-	            
-					 
-	                    <li class="span3 article-entry standard">
-	                        <h4><a href="./python/flask中文编码.html">Flask中文编码</a></h4>
-	                        <span class="article-meta">
-	                            2016-11-08 13:51
-	                            
-	        				</span>
-	                    </li>
-	                
-	            
-            </ul>
-	    </section>
-	</div>
 
-	
-		 
-	<div class="row home-listing-area">
-	    <div class="span8">
-	        <h2>
-	        Tool
-	        </h2>
-	    </div>
-	</div>
-
-	
-		
-	
-		
-	
-
-	<div class="row separator">
-	    <section class="span8 articles-list">
-            <ul class="articles">
-	            
-					 
-	                    <li class="span3 article-entry standard">
-	                        <h4><a href="./tool/simiki.html">Simiki</a></h4>
-	                        <span class="article-meta">
-	                            2016-11-01 10:12
-	                            
-	        				</span>
-	                    </li>
-	                
-	            
-					 
-	                    <li class="span3 article-entry standard">
-	                        <h4><a href="./tool/常用软件.html">常用软件</a></h4>
-	                        <span class="article-meta">
-	                            2016-11-01 13:42
-	                            
-	        				</span>
-	                    </li>
-	                
-	            
-            </ul>
-	    </section>
-	</div>
+<p>将<code>ensure_ascii</code>设置成<code>False</code>，并且将数据用<code>make_response()</code>包裹起来</p>
+	</article>
 
 	
 
