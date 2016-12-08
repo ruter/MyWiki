@@ -7,7 +7,7 @@
 	<!-- META TAGS -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>素材资源 - Ruter's Knowledge Wiki</title>
+	<title>LaTeX - Ruter's Knowledge Wiki</title>
     <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
     <meta name="description" content="It's a knowledge management wiki."/>
     <link rel="shortcut icon" href="/MyWiki/static/images/favicon.ico" type="image/x-icon">
@@ -82,34 +82,126 @@
 		        
 		        	
 		        
-		        <li><a href="/MyWiki/#bookmarks">bookmarks</a> <span class="divider">/</span></li>
+		        <li><a href="/MyWiki/#tool">tool</a> <span class="divider">/</span></li>
 	        
 	    
-      	<li class="active">素材资源</li>
+      	<li class="active">LaTeX</li>
 	</ul>
 
 	<article class=" type-post format-standard hentry clearfix">
-        <h1 class="post-title">素材资源</h1>
+        <h1 class="post-title">LaTeX</h1>
 
         <div class="post-meta clearfix">
-                <span class="date">2016-11-09 00:32</span>
-                
-                	Updated: <span class="date">2016-11-09 21:45</span>
+                <span class="date">2016-12-08 22:22</span>
                 
         </div><!-- end of post meta -->
 
-        <ul>
-<li><a href="http://www.cssmoban.com/">模板之家</a></li>
-<li><a href="http://www.sccnn.com/">素材中国</a></li>
-<li><a href="http://simpledesktops.com/browse/">Simple Desktops</a></li>
-<li><a href="http://www.iconfont.cn/plus">Iconfont</a> - 阿里巴巴矢量图标库</li>
-<li><a href="http://taira-komori.jpn.org/freesoundcn.html">小森平的免费下载音效</a></li>
-<li><a href="http://cn.vectorhq.com/">VectorHQ</a> - 免费矢量和PSD图片</li>
-<li><a href="https://pixabay.com/">Pixabay</a> - 免费的高清图片</li>
-<li><a href="http://www.gratisography.com/">GRATISOGRAPHY</a> - Free high-resolution pictures you can use on your personal and commercial projects.</li>
-<li><a href="https://www.cheatography.com/">Cheatography</a> - Over 2,500 Free Cheat Sheets, Revision Aids and Quick References!</li>
-<li><a href="http://blog.jobbole.com/87578/">编程字体小汇总</a></li>
+        <h1 id="_1">排版工具</h1>
+<p>以<code>XeLaTeX</code>为主。</p>
+<h1 id="_2">控制序列</h1>
+<p>以反斜杠<code>\</code>开头，以第一个<strong>空格</strong>或<strong>非字母</strong>的字符结束的一串文字，他们并不被输出，但是他们会影响输出文档的效果。</p>
+<div class="hlcode"><pre><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="c">%这里是导言区</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+Hello, world!
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<p><code>\documentclass{article}</code>的控制序列是<code>documentclass</code>，它后面紧跟着的<code>{article}</code>代表这个控制序列有一个必要的<strong>参数</strong>，该参数的值为<code>article</code>。这个控制序列的作用是调用名为<code>article</code>的文档类。</p>
+<p>注意: <code>TeX</code>的控制序列是<strong>大小写敏感</strong>的</p>
+<p>控制序列<code>begin</code>总是与<code>end</code>成对出现的，这两个控制序列以及他们之间的内容被称为<code>环境</code>，它们之后的第一个必要参数总是一致的，被称为<code>环境名</code>。</p>
+<p>注意: 只有在<code>document</code>环境中的内容，才会被正常输出到文档中或是作为控制序列对文档产生影响</p>
+<p><code>\begin{document}</code>与<code>\documentclass{article}</code>之间的部分被称为<code>导言区</code>。导言区中的控制序列通常会影响到整个输出文档，如页面大小、页眉页脚样式、章节标题样式等。</p>
+<h1 id="_3">中文支持</h1>
+<p>只需要使用几个简单的<code>宏包</code>，就能完成中文支持了，所谓宏包，就是一系列控制序列的合集。</p>
+<p>宏包的调用方式为<code>\usepackage{...}</code></p>
+<p>可以使用<code>CTeX</code>或<code>xeCJK</code>宏包来处理中英文混排的文档，下面以<code>xeCJK</code>为例</p>
+<div class="hlcode"><pre><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>xeCJK<span class="nb">}</span> <span class="c">%调用 xeCJK 宏包</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+你好，world!
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<h1 id="_4">标题、作者、日期</h1>
+<p>为文档定义标题、作者和日期，之后使用控制序列<code>maketitle</code>按预定的格式展现</p>
+<div class="hlcode"><pre><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>xeCJK<span class="nb">}</span>
+
+<span class="k">\title</span><span class="nb">{</span>Learn LaTeX<span class="nb">}</span>
+<span class="k">\author</span><span class="nb">{</span>Ruter<span class="nb">}</span>
+<span class="k">\date</span><span class="nb">{</span><span class="k">\today</span><span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="k">\maketitle</span>
+你好，world!
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<h1 id="_5">章节和段落</h1>
+<p>在文档类<code>article</code>中，定义了五个控制序列来调整行文组织结构</p>
+<ul>
+<li><code>\section{...}</code></li>
+<li><code>\subsection{...}</code></li>
+<li><code>\subsubsection{...}</code></li>
+<li><code>\paragraph{...}</code></li>
+<li><code>\subparagraph{...}</code></li>
 </ul>
+<p>举个例子</p>
+<div class="hlcode"><pre><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>xeCJK<span class="nb">}</span>
+
+<span class="k">\title</span><span class="nb">{</span>Learn LaTeX<span class="nb">}</span>
+<span class="k">\author</span><span class="nb">{</span>Ruter<span class="nb">}</span>
+<span class="k">\date</span><span class="nb">{</span><span class="k">\today</span><span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="k">\maketitle</span>
+
+<span class="k">\section</span><span class="nb">{</span>你好中国<span class="nb">}</span>
+中国在East Asia.
+<span class="k">\subsection</span><span class="nb">{</span>Hello Beijing<span class="nb">}</span>
+北京是capital of China.
+
+<span class="k">\subsubsection</span><span class="nb">{</span>Hello Dongcheng District<span class="nb">}</span>
+<span class="k">\paragraph</span><span class="nb">{</span>Tian&#39;anmen Square<span class="nb">}</span>
+is in the center of Beijing
+<span class="k">\subparagraph</span><span class="nb">{</span>Chairman Mao<span class="nb">}</span>
+is in the center of 天安门广场。
+
+<span class="k">\subsection</span><span class="nb">{</span>Hello 山东<span class="nb">}</span>
+<span class="k">\paragraph</span><span class="nb">{</span>山东大学<span class="nb">}</span> is one of the best university in 山东。
+
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<h1 id="_6">插入目录</h1>
+<p>要插入目录，使用<code>\tableofcontents</code>控制序列，置于<code>\maketitle</code>前</p>
+<h1 id="_7">数学公式</h1>
+<p>使用<code>AMS-LaTeX</code>提供的数学功能，需要在导言区加载<code>amsmath</code>宏包</p>
+<div class="hlcode"><pre><span class="err">\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">amsmath</span><span class="p">}</span>
+</pre></div>
+
+
+<h2 id="_8">模式</h2>
+<h2 id="_9">上下标</h2>
+<h2 id="_10">根式与分式</h2>
+<h2 id="_11">运算符</h2>
+<h2 id="_12">定界符</h2>
+<h2 id="_13">省略号</h2>
+<h2 id="_14">矩阵</h2>
+<h2 id="_15">多行公式</h2>
+<h2 id="_16">公式组</h2>
+<h2 id="_17">分段函数</h2>
+<h1 id="_18">图片和表格</h1>
+<h2 id="_19">图片</h2>
+<h2 id="_20">表格</h2>
+<h2 id="_21">浮动体</h2>
+<h1 id="_22">版面设置</h1>
 	</article>
 
 	
