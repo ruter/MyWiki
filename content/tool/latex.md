@@ -1,8 +1,11 @@
 ---
 title: "LaTeX"
 date: 2016-12-08 22:22
+updated: 2016-12-09 11:15
 tag: LaTeX
 ---
+
+[TOC]
 
 # 排版工具
 以`XeLaTeX`为主。
