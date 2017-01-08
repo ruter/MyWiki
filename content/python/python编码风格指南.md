@@ -1,7 +1,7 @@
 ---
 title: "Python编码风格指南"
 date: 2017-01-06 09:16
-updated: 2017-01-08 11:44
+updated: 2017-01-08 13:10
 tag: Python, 风格, 规范
 ---
 
@@ -39,7 +39,7 @@ def long_function_name(
 错误示例:
 
 ```python
-# 采用垂直对齐时第一行不应有参数
+# 采用非垂直对齐时第一行不应有参数
 foo = long_function_name(var_one, var_two,
     var_three, var_four)
 
