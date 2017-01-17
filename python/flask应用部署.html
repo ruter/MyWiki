@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="zh-CN"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="zh-CN"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="zh-CN"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="zh-CN"> <!--<![endif]-->
+<head>
+	<!-- META TAGS -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flask应用部署 - Ruter's Knowledge Wiki</title>
+    <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
+    <meta name="description" content="It's a knowledge management wiki."/>
+    <link rel="shortcut icon" href="/MyWiki/static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/MyWiki/static/images/favicon.ico" type="image/x-icon">
+
+    <!-- Style Sheet-->
+    <link rel='stylesheet' id='bootstrap-css-css'  href='/MyWiki/static/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='responsive-css-css'  href='/MyWiki/static/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='main-css-css'  href='/MyWiki/static/css/main5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel="Stylesheet" type="text/css" href="/MyWiki/static/css/monokai.css">
+    <!-- <link rel='stylesheet' id='custom-css-css'  href='/MyWiki/static/css/custom5152.html?ver=1.0' type='text/css' media='all' /> -->
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+     <script src="js/html5.js"></script></script>
+    <![endif]-->
+</head>
+<body>
+	<!-- Start of Header -->
+	<div class="header-wrapper">
+        <header>
+            <div class="container">
+                <div class="logo-container">
+                    <!-- Website Logo -->
+                    <a href="/MyWiki"  title="Ruter's Knowledge Wiki">
+                            <img src="/MyWiki/static/images/logo.png" alt="Ruter's Knowledge Wiki">
+                    </a>
+                    <span class="tag-line">My personal knowledge management</span>
+                </div>
+                <!-- Start of Main Navigation -->
+                <nav class="main-nav">
+                    <div class="menu-top-menu-container">
+                        <ul id="menu-top-menu" class="clearfix">
+                            <li><a href="/MyWiki">Home</a></li>
+                            <li><a href="http://ruter.sundaystart.net">Blog</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End of Main Navigation -->
+            </div>
+        </header>
+	</div>
+	<!-- End of Header -->
+
+	<!-- Start of Search Wrapper -->
+	<!-- <div class="search-area-wrapper">
+        <div class="search-area container">
+            <h3 class="search-header">Wiki it!</h3>
+            <p class="search-tag-line">You can enter what you are looking for!</p>
+
+            <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+                    <input class="search-term required st-default-search-input" type="text" id="s" name="s" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Type your search terms here" title="* Please enter a search term!" />
+                    <input class="search-btn" type="submit" value="Search" />
+                    <div id="search-error-container"></div>
+            </form>
+        </div>
+	</div> -->
+	<!-- End of Search Wrapper -->
+
+	<!-- Start of Page Container -->
+    <div class="page-container">
+        <div class="container">
+            <div class="row">
+            	<!-- start of page content -->
+                <div class="span8 page-content">
+                	
+	<ul class="breadcrumb">
+		<li><a href="/MyWiki">Home</a><span class="divider">/</span></li>
+		
+	        
+		        
+		        	
+		        
+		        <li><a href="/MyWiki/#python">python</a> <span class="divider">/</span></li>
+	        
+	    
+      	<li class="active">Flask应用部署</li>
+	</ul>
+
+	<article class=" type-post format-standard hentry clearfix">
+        <h1 class="post-title">Flask应用部署</h1>
+
+        <div class="post-meta clearfix">
+                <span class="date">2017-01-17 13:23</span>
+                
+        </div><!-- end of post meta -->
+
+        <h1 id="_1">部署工具</h1>
+<h2 id="_2">应用容器</h2>
+<p>在开发应用时，本地运行的那个服务器并不能处理真实的请求。当你真的需要向公众发布你的应用，你需要在应用容器，例如<code>Gunicorn</code>，上运行它。Gunicorn接待请求，并处理诸如线程的复杂事务。</p>
+<p>要想使用Gunicorn，需要通过pip安装<code>gunicorn</code>到虚拟环境中。</p>
+<p>为了在后台运行这个服务器（也即使它变成守护进程），我们可以传递<code>-D</code>选项给Gunicorn。这下它会持续运行，即使你关闭了当前的终端会话。</p>
+<p>如果我们这么做了，当我们想要关闭服务器时就会困惑于到底应该关闭哪个进程。我们可以让Gunicorn把进程ID储存到文件中，这样如果想要停止或者重启服务器时，我们可以不用在一大串运行中的进程中搜索它。我们使用<code>-p &lt;file&gt;</code>选项来这么做。现在，我们的Gunicorn部署命令是这样：</p>
+<div class="hlcode"><pre><span class="o">(</span>ourapp<span class="o">)</span><span class="nv">$ </span>gunicorn app:app -p app.pid -D
+<span class="o">(</span>ourapp<span class="o">)</span><span class="nv">$ </span>cat app.pid
+63101
+</pre></div>
+
+
+<p>要想重新启动或者关闭服务器，我们可以运行对应的命令：</p>
+<div class="hlcode"><pre><span class="o">(</span>ourapp<span class="o">)</span><span class="nv">$ </span><span class="nb">kill</span> -HUP <span class="sb">`</span>cat app.pid<span class="sb">`</span> <span class="c"># 发送一个SIGHUP信号，终止进程</span>
+<span class="o">(</span>ourapp<span class="o">)</span><span class="nv">$ </span><span class="nb">kill</span> <span class="sb">`</span>cat app.pid<span class="sb">`</span>
+</pre></div>
+
+
+<p>默认下Gunicorn会运行在<code>8000</code>端口。如果这已经被另外的应用占用了，你可以通过添加<code>-b</code>选项来指定端口。</p>
+<div class="hlcode"><pre><span class="o">(</span>ourapp<span class="o">)</span><span class="nv">$ </span>gunicorn app:app -p app.pid -b 127.0.0.1:7999 -D
+</pre></div>
+
+
+<h2 id="nginx">Nginx反向代理</h2>
+<p>反向代理处理公共的HTTP请求，发送给Gunicorn并将响应带回给发送请求的客户端。</p>
+<p>要想配置Nginx作为运行在127.0.0.1:8000的Gunicorn的反向代理，我们可以在<em>/etc/nginx/sites-available</em>下给应用创建一个文件。不如称之为<em>exploreflask.com</em>吧。</p>
+<p><em>/etc/nginx/sites-available/exploreflask.com</em></p>
+<div class="hlcode"><pre><span class="cp"># Redirect www.exploreflask.com to exploreflask.com</span>
+<span class="n">server</span> <span class="p">{</span>
+        <span class="n">server_name</span> <span class="n">www</span><span class="p">.</span><span class="n">exploreflask</span><span class="p">.</span><span class="n">com</span><span class="p">;</span>
+        <span class="n">rewrite</span> <span class="o">^</span> <span class="n">http</span><span class="o">:</span><span class="c1">//exploreflask.com/ permanent;</span>
+<span class="p">}</span>
+
+<span class="cp"># Handle requests to exploreflask.com on port 80</span>
+<span class="n">server</span> <span class="p">{</span>
+        <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
+        <span class="n">server_name</span> <span class="n">exploreflask</span><span class="p">.</span><span class="n">com</span><span class="p">;</span>
+
+        <span class="err">#</span> <span class="n">Handle</span> <span class="n">all</span> <span class="n">locations</span>
+        <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+                <span class="err">#</span> <span class="n">Pass</span> <span class="n">the</span> <span class="n">request</span> <span class="n">to</span> <span class="n">Gunicorn</span>
+                <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">:</span><span class="c1">//127.0.0.1:8000;</span>
+
+                <span class="err">#</span> <span class="n">Set</span> <span class="n">some</span> <span class="n">HTTP</span> <span class="n">headers</span> <span class="n">so</span> <span class="n">that</span> <span class="n">our</span> <span class="n">app</span> <span class="n">knows</span> <span class="n">where</span> <span class="n">the</span> <span class="n">request</span> <span class="n">really</span> <span class="n">came</span> <span class="n">from</span>
+                <span class="n">proxy_set_header</span> <span class="n">Host</span> <span class="err">$</span><span class="n">host</span><span class="p">;</span>
+                <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Real</span><span class="o">-</span><span class="n">IP</span> <span class="err">$</span><span class="n">remote_addr</span><span class="p">;</span>
+                <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span> <span class="err">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>现在在<em>/etc/nginx/sites-enabled</em>下创建该文件的符号链接，接着重启Nginx。</p>
+<div class="hlcode"><pre><span class="err">$</span> <span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> \
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">available</span><span class="o">/</span><span class="n">exploreflask</span><span class="p">.</span><span class="n">com</span> \
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="n">exploreflask</span><span class="p">.</span><span class="n">com</span>
+</pre></div>
+
+
+<h2 id="proxyfix">ProxyFix</h2>
+<p>有时，你会遇到Flask不能恰当处理转发的请求的情况。这也许是因为在Nginx中设置的某些HTTP报文头部造成的。我们可以使用Werkzeug的ProxyFix来fix转发请求。</p>
+<p><em>app.py</em></p>
+<div class="hlcode"><pre><span class="n">from</span> <span class="n">flask</span> <span class="n">import</span> <span class="n">Flask</span>
+
+<span class="cp"># Import the fixer</span>
+<span class="n">from</span> <span class="n">werkzeug</span><span class="p">.</span><span class="n">contrib</span><span class="p">.</span><span class="n">fixers</span> <span class="n">import</span> <span class="n">ProxyFix</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="cp"># Use the fixer</span>
+<span class="n">app</span><span class="p">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">ProxyFix</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">wsgi_app</span><span class="p">)</span>
+
+<span class="err">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="sc">&#39;/&#39;</span><span class="p">)</span>
+<span class="n">def</span> <span class="n">index</span><span class="p">()</span><span class="o">:</span>
+    <span class="k">return</span> <span class="s">&quot;Hello World!&quot;</span>
+</pre></div>
+
+
+<h2 id="_3">总结</h2>
+<ul>
+<li>你可以把Flask应用托管到AWS EC2， Heroku和Digital Ocean。</li>
+<li>Flask应用的基本部署依赖包括一个应用容器（比如Gunicorn）和一个反向代理（比如Nginx）。</li>
+<li>Gunicorn应该退居Nginx幕后并监听127.0.0.1（内部请求）而非0.0.0.0（外部请求）</li>
+<li>使用Werkzeug的ProxyFix来处理Flask应用遇到的特定的转发报文头部。</li>
+</ul>
+	</article>
+
+	
+
+                </div>
+                <!-- end of page content -->
+
+                <!-- start of sidebar -->
+                <aside class="span4 page-sidebar">
+                	<section class="widget">
+                        <div class="support-widget">
+                            <h3 class="title">Hi there!</h3>
+                            <p class="intro">Hope you find something useful :)</p>
+                        </div>
+                	</section>
+                </aside>
+                <!-- end of sidebar -->
+            </div>
+        </div>
+    </div>
+    <!-- End of Page Container -->
+
+    <!-- Start of Footer -->
+    <footer id="footer-wrapper">
+        <!-- Footer Bottom -->
+        <div id="footer-bottom-wrapper">
+            <div id="footer-bottom" class="container">
+                <div class="row">
+                    <div class="span6">
+                        <p class="copyright">
+                            Copyright © 2017 Ruter. Site Generated 2017-01-17 14:14:27
+                        </p>
+                    </div>
+                    <div class="span6">
+                        <!-- Social Navigation -->
+                        <ul class="social-nav clearfix">
+                                <li class="linkedin"><a target="_blank" href="#"></a></li>
+                                <li class="stumble"><a target="_blank" href="#"></a></li>
+                                <li class="google"><a target="_blank" href="#"></a></li>
+                                <li class="deviantart"><a target="_blank" href="#"></a></li>
+                                <li class="flickr"><a target="_blank" href="#"></a></li>
+                                <li class="skype"><a target="_blank" href="skype:#?call"></a></li>
+                                <li class="rss"><a target="_blank" href="#"></a></li>
+                                <li class="twitter"><a target="_blank" href="#"></a></li>
+                                <li class="facebook"><a target="_blank" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Footer Bottom -->
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- script -->
+    <!-- <script type='text/javascript' src='/MyWiki/static/js/jquery-1.8.3.min.js'></script>
+    <script type='text/javascript' src='/MyWiki/static/js/jquery.easing.1.3.js'></script>
+    <script type='text/javascript' src='/MyWiki/static/js/jquery.liveSearch.js'></script>
+    <script type='text/javascript' src='/MyWiki/static/js/jquery.form.js'></script>
+    <script type='text/javascript' src='/MyWiki/static/js/jquery.validate.min.js'></script> -->
+    <script type="text/javascript">
+      (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+      })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+      
+      _st('install','oXs1TQsrB1oY4LHhr7nb','2.0.0');
+    </script>
+</body>
+</html>
