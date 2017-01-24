@@ -7,7 +7,7 @@
 	<!-- META TAGS -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>CentOS端口操作 - Ruter's Knowledge Wiki</title>
+	<title>Odoo - Ruter's Knowledge Wiki</title>
     <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
     <meta name="description" content="It's a knowledge management wiki."/>
     <link rel="shortcut icon" href="/MyWiki/static/images/favicon.ico" type="image/x-icon">
@@ -82,68 +82,139 @@
 		        
 		        	
 		        
-		        <li><a href="/MyWiki/#linux">linux</a> <span class="divider">/</span></li>
+		        <li><a href="/MyWiki/#python">python</a> <span class="divider">/</span></li>
 	        
 	    
-      	<li class="active">CentOS端口操作</li>
+      	<li class="active">Odoo</li>
 	</ul>
 
 	<article class=" type-post format-standard hentry clearfix">
-        <h1 class="post-title">CentOS端口操作</h1>
+        <h1 class="post-title">Odoo</h1>
 
         <div class="post-meta clearfix">
-                <span class="date">2016-11-01 15:55</span>
+                <span class="date">2017-01-24 12:32</span>
                 
         </div><!-- end of post meta -->
 
-        <h1 id="centos-6">CentOS 6</h1>
-<p>查看当前所有的<code>iptables</code>配置</p>
-<div class="hlcode"><pre><span class="n">iptables</span> <span class="o">-</span><span class="n">L</span> <span class="o">-</span><span class="n">n</span>
+        <h1 id="_1">注意事项</h1>
+<ol>
+<li><code>Odoo</code>不支持<code>Python3</code></li>
+<li>不能使用<code>root</code>身份开启odoo服务</li>
+</ol>
+<h1 id="odoo">安装Odoo</h1>
+<h2 id="_2">安装基础依赖</h2>
+<div class="hlcode"><pre><span class="c"># 安装系统更新</span>
+<span class="nv">$ </span>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade
+<span class="c"># 安装Git和npm</span>
+<span class="nv">$ </span>sudo apt-get install git
+<span class="nv">$ </span>sudo apt-get install npm
+<span class="c"># 创建nodejs软链</span>
+<span class="nv">$ </span>sudo ln -s /usr/bin/nodejs /usr/bin/node
+<span class="c"># 安装less</span>
+<span class="nv">$ </span>sudo npm install -g less less-plugin-clean-css
 </pre></div>
 
 
-<p>添加允许<code>INPUT</code>访问规则，如果需要拒绝访问，将<code>ACCEPT</code>改为<code>DROP</code>即可</p>
-<div class="hlcode"><pre><span class="cp"># HTTP</span>
-<span class="n">iptables</span> <span class="o">-</span><span class="n">A</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="o">--</span><span class="n">dport</span> <span class="mi">80</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
-<span class="n">iptables</span> <span class="o">-</span><span class="n">A</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="o">--</span><span class="n">dport</span> <span class="mi">8080</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
-
-<span class="cp"># 打开一个范围的端口</span>
-<span class="n">iptables</span> <span class="o">-</span><span class="n">A</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="o">--</span><span class="n">dport</span> <span class="mi">9000</span><span class="o">:</span><span class="mi">9009</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
+<h2 id="odoo_1">从源码安装Odoo</h2>
+<div class="hlcode"><pre><span class="c"># 创建工作目录</span>
+<span class="nv">$ </span>mkdir ~/odoo-dev
+<span class="nv">$ </span><span class="nb">cd</span> ~/odoo-dev
+<span class="c"># 下载Odoo源码</span>
+<span class="nv">$ </span>git clone https://github.com/odoo/odoo.git -b 10.0 --depth<span class="o">=</span>1
+<span class="c"># 安装Odoo的系统依赖</span>
+<span class="nv">$ </span>./odoo/setup/setup_dev.py setup_deps
+<span class="c"># 安装PostgreSQL</span>
+<span class="nv">$ </span>./odoo/setup/setup_dev.py setup_pg
 </pre></div>
 
 
-<p>保存<code>iptables</code>的设置</p>
-<div class="hlcode"><pre><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">rc</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">save</span>
+<h2 id="tip">Tip</h2>
+<p>启动Odoo服务器实例用命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin
 </pre></div>
 
 
-<p>开启、停止、状态、重启</p>
-<div class="hlcode"><pre><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">start</span>
-<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">stop</span>
-<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">status</span>
-<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">iptables</span> <span class="n">restart</span> <span class="err">#</span> <span class="err">或者</span> <span class="n">service</span> <span class="n">iptables</span> <span class="n">restart</span>
+<p>Odoo默认监听<code>8069</code>端口，启动实例后可通过<code>http://&lt;server-address&gt;:8069</code>访问。</p>
+<h1 id="odoo_2">初始化新的Odoo数据库</h1>
+<p>在创建数据库前需保证当前用户是<code>PostgreSQL</code>的超级用户:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>sudo createuser --superuser <span class="k">$(</span>whoami<span class="k">)</span>
 </pre></div>
 
 
-<h1 id="centos-7">CentOS 7</h1>
-<p>CentOS 7使用<code>firewalld</code>代替了原来的<code>iptables</code>，相关端口命令如下</p>
-<p>开启端口</p>
-<div class="hlcode"><pre><span class="n">firewall</span><span class="o">-</span><span class="n">cmd</span> <span class="o">--</span><span class="n">zone</span><span class="o">=</span><span class="n">public</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span> <span class="o">--</span><span class="n">permanent</span>
+<p><strong>注意</strong>: 实际操作时这里可能会出现无法创建的错误，请根据具体错误查询后自行更正操作。</p>
+<p>创建新数据库用<code>createdb</code>命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>createdb demo
 </pre></div>
 
 
-<p>含义</p>
-<div class="hlcode"><pre><span class="o">--</span><span class="n">zone</span> <span class="err">#作用域</span>
-
-<span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span> <span class="err">#添加端口，格式为：端口</span><span class="o">/</span><span class="err">通讯协议</span>
-
-<span class="o">--</span><span class="n">permanent</span> <span class="err">#永久生效，没有此参数重启后失效</span>
+<p>将数据库初始化为Odoo的数据模式，需要使用<code>-d</code>选项:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin -d demo
 </pre></div>
 
 
-<p>重启防火墙</p>
-<div class="hlcode"><pre><span class="n">firewall</span><span class="o">-</span><span class="n">cmd</span> <span class="o">--</span><span class="n">reload</span>
+<p><strong>注意</strong>: 初始化数据库默认会添加演示数据，如果不需要，只需添加<code>--without-demo-data=all</code>即可。</p>
+<h2 id="_3">数据库管理</h2>
+<p>除了可以创建空的数据库外，还能从现有的数据库进行拷贝，以方便测试等使用。在开始之前需要保证关闭了源数据库的所有连接，然后执行以下命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>createdb --template<span class="o">=</span>demo demo-test
 </pre></div>
+
+
+<p>列出现有数据库，可以用如下命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>psql -l
+</pre></div>
+
+
+<p>删除数据库使用:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>dropdb demo-test
+</pre></div>
+
+
+<h1 id="odoo_3">Odoo配置选项</h1>
+<h2 id="_4">配置文件</h2>
+<p>Odoo的大部分配置选项都会存储在配置文件里，默认使用的是<code>.odoorc</code>，位于<code>home</code>下。</p>
+<p>初次安装Odoo，<code>.odoorc</code>配置文件是不会自动生成的，如果它不存在，我们应该用<code>--save</code>选项创建默认配置文件，保存最近一次运行实例的配置:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin --save --stop-after-init
+</pre></div>
+
+
+<p>其中<code>--stop-after-init</code>选项会在完成所有动作后自动停止服务。一般用于运行测试或检查模块是否正确安装。</p>
+<p>除了使用默认配置，我们还可以用<code>--conf=&lt;filepath&gt;</code>选项指定配置文件。</p>
+<h2 id="_5">改变监听端口</h2>
+<p>使用<code>--xmlrpc-port=&lt;port&gt;</code>命令选项可以更改Odoo服务监听的端口。改变监听端口可用于运行多个不同的Odoo实例，不同的实例可以使用相同的或不同的数据库。</p>
+<h2 id="_6">数据库过滤选项</h2>
+<p>使用数据库过滤选项可以保证Odoo服务只请求我们需要的数据库，以防止潜在的错误。</p>
+<p>使用<code>--db-filter</code>选项以过滤数据库，它接受正则表达式，完全匹配数据库<code>demo</code>使用如下命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin --db-filter<span class="o">=</span>^demo<span class="err">$</span>
+</pre></div>
+
+
+<h2 id="_7">管理日志</h2>
+<p><code>--log-level</code>选项允许设置日志的级别，例如debug级别，可以使用<code>--log-level=debug</code>选项。</p>
+<p>日志输出默认是标准输出，即输出到控制台，可以使用<code>--logfile=&lt;filepath&gt;</code>选项指定输出到文件中。</p>
+<h1 id="_8">安装第三方模块</h1>
+<h2 id="_9">社区的模块</h2>
+<p>Odoo有App Store，地址是<a href="apps.odoo.com">apps.odoo.com</a>。除了官方商店，还有很多社区贡献和维护的模块，可以在GitHub仓库<a href="https://github.com/OCA/">https://github.com/OCA/</a>获取。</p>
+<p>安装模块到Odoo，只需要将其拷贝到<code>addons</code>目录下即可，不过对于使用版本管理系统来管理代码而言，这种做法并不推荐。</p>
+<p>我们可以为自定义的模块指定不同的目录，以和官方的区分开。</p>
+<h2 id="_10">配置路径</h2>
+<p>以一个例子作为说明，先从GitHub下载代码，然后配置Odoo的<code>addons_path</code>让Odoo可以查找到自定义的模块:</p>
+<div class="hlcode"><pre><span class="nv">$ </span><span class="nb">cd</span> ~/odoo-dev
+<span class="nv">$ </span>git clone https://github.com/dreispt/todo_app.git -b 10.0
+</pre></div>
+
+
+<p>现在<code>/todo_app</code>和<code>/odoo</code>都在同一目录下，前者包含了我们需要的自定义模块。</p>
+<p>我们可以提供一个包含模块的目录路径的列表，让Odoo可以从这些路径里找到所需的模块。</p>
+<p>按如下命令启动Odoo，指定<code>addons_path</code>:</p>
+<div class="hlcode"><pre><span class="nv">$ </span><span class="nb">cd</span> ~/odoo-dev/odoo
+<span class="nv">$ </span>./odoo-bin -d demo --addons-path<span class="o">=</span><span class="s2">&quot;../todo_app,./addons&quot;</span>
+</pre></div>
+
+
+<h2 id="_11">更新应用列表</h2>
+<p>在新添加的模块可以被安装前，我们还需要让Odoo更新它的模块列表。</p>
+<p>首先需要打开开发者模式(developer mode)，接着点击<strong>Update Apps List</strong>菜单项。</p>
+<p>在更新模块列表后，我们可以通过应用列表或搜索<code>todo</code>查找到我们刚安装的模块。</p>
 	</article>
 
 	
