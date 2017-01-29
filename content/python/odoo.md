@@ -1,6 +1,7 @@
 ---
 title: "Odoo"
 date: 2017-01-24 12:32
+updated: 2017-01-29 12:35
 tag: Odoo10
 ---
 
@@ -167,6 +168,8 @@ $ cd ~/odoo-dev/odoo
 $ ./odoo-bin -d demo --addons-path="../todo_app,./addons"
 ```
 
+指定`addons_path`后可以在命令中加入`--save`选项，将命令中的选项保存到配置文件中，下一次开启服务直接运行`./odoo-bin`，将会直接使用最后一次保存的选项。
+
 ## 更新应用列表
 
 在新添加的模块可以被安装前，我们还需要让Odoo更新它的模块列表。
@@ -174,3 +177,85 @@ $ ./odoo-bin -d demo --addons-path="../todo_app,./addons"
 首先需要打开开发者模式(developer mode)，接着点击**Update Apps List**菜单项。
 
 在更新模块列表后，我们可以通过应用列表或搜索`todo`查找到我们刚安装的模块。
+
+
+
+# 创建模块的基础框架
+
+Odoo的`scaffold`命令可以自动创建一个包含基础结构的目录，输入以下命令查看详细说明:
+
+```bash
+$ ~/odoo-dev/odoo/odoo-bin scaffold --help
+```
+
+一个Odoo扩展模块就是一个包含`__manifest__.py`描述符文件的目录。
+
+同时为了可以被Python引用，还需要有`__init__.py`文件。
+
+`__manifest__.py`文件中只包含一个Python字典，里面有很多属性，其中只有属性`name`是必需的。
+
+以下是一个`__manifest__.py`文件的内容:
+
+```python
+{
+  'name': 'To-Do Application',
+  'description': 'Manage your personal To-Do tasks.',
+  'author': 'Daniel Reis',
+  'depends': ['base'],
+  'application': True,
+}
+```
+
+其中`depends`属性可以是一组需要的模块，当这个模块被安装的时候Odoo会自动将列出的依赖模块安装好。这个属性是非强制的，不过建议总是包含它，如果没有所需的依赖，就填入核心模块`base`。
+
+**注意**：请确保所需依赖都分列在`depends`属性中，否则将会导致安装失败或加载错误。
+
+除了上述属性外，还建议加入以下属性:
+
+- `summary`作为模块的副标题显示
+- `version`版本号，默认是`1.0`，遵循`semantic versioning rules`
+- `license`，默认是`LGPL-3`
+- `website`
+- `category`模块的功能分类，默认是`Uncategorized`
+
+还有其他可以使用的属性:
+
+- `installable`属性默认为`True`，当为`False`时禁用模块
+- `auto_install`如果为`True`，则表示该模块及其依赖将会被自动安装
+
+## 关于license
+
+大部分Odoo模块都是使用`GNU Lesser General Public License (LGPL)`和`Affero General Public License (AGPL)`。前者允许商用并且无需公布相关源码，后者则是更加严格的开源许可，要求公开源码。
+
+## 安装新模块
+
+要安装新增的模块，首先需要开启**开发者模式**，然后选择**Update Apps List**手动更新列表，然后在搜索框输入新增的模块或app的名字即可查找到，点击Install进行安装。
+
+**注意**：如果有多个数据库，请确保使用了正确的那一个，在后台页面的用户名旁的小括号内可以看到当前使用的数据库的名称。手动强制使用对应数据库的一个方法就是加入`--db-filter=^MYDB$`选项。
+
+
+
+# 升级模块
+
+当数据文档或代码有变化，需要应用更改时，就需要重启odoo的服务，以`todo_app`为例可以这样对模块进行升级:
+
+```bash
+$ ./odoo-bin -d todo -u todo_app
+```
+
+其中`-u`选项(或`--update`)需要`-d`选项指定使用的数据库，并且可以接受一组以逗号分隔的模块，进行批量升级。例如`-u todo_app,mail`。
+
+**注意**：升级模块列表以及卸载模块，目前均不支持在命令行中进行操作，它们都只能通过网页在`Apps`菜单进行操作。
+
+
+
+# 服务器开发模式
+
+在开启Odoo服务器实例时加上`--dev=all`选项可以开启开发模式。
+
+开发者模式为开发提供了一些便利的特性，最重要的两点是：
+
+- 只要有Python文件被保存，就会自动重新加载Python代码，免去了手动重启服务器的步骤
+- 直接从`XML`文件读取视图的定义，避免了手动更新模块
+
+`--dev`选项可以接受一组以逗号分隔的选项，`all`适用于大部分时候。
