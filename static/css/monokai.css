@@ -64,8 +64,8 @@ pre .gu { color: #75715e; } /* Generic.Subheading & Diff Unified/Comment? */
 pre .gd { color: #f92672; } /* Generic.Deleted & Diff Deleted */
 pre .gi { color: #a6e22e; } /* Generic.Inserted & Diff Inserted */
 
-.hlcode pre .hll { background-color: #49483e }
-.hlcode pre { background: #272822 }
+.hlcode pre { background-color: #272822; }
+.hlcode pre .hll { background-color: #272822; }
 .hlcode pre .c { color: #75715e } /* Comment */
 .hlcode pre .err { color: #960050; background-color: #1e0010 } /* Error */
 .hlcode pre .k { color: #66d9ef } /* Keyword */
@@ -74,7 +74,7 @@ pre .gi { color: #a6e22e; } /* Generic.Inserted & Diff Inserted */
 .hlcode pre .o { color: #f92672 } /* Operator */
 .hlcode pre .p { color: #f8f8f2 } /* Punctuation */
 .hlcode pre .cm { color: #75715e } /* Comment.Multiline */
-.hlcode pre .cp { color: #75715e } /* Comment..hlcode Preproc */
+.hlcode pre .cp { color: #75715e } /* Comment.Preproc */
 .hlcode pre .c1 { color: #75715e } /* Comment.Single */
 .hlcode pre .cs { color: #75715e } /* Comment.Special */
 .hlcode pre .ge { font-style: italic } /* Generic.Emph */
