@@ -94,6 +94,8 @@
         <div class="post-meta clearfix">
                 <span class="date">2017-01-24 12:32</span>
                 
+                	Updated: <span class="date">2017-01-29 12:35</span>
+                
         </div><!-- end of post meta -->
 
         <h1 id="_1">注意事项</h1>
@@ -211,10 +213,67 @@
 </pre></div>
 
 
+<p>指定<code>addons_path</code>后可以在命令中加入<code>--save</code>选项，将命令中的选项保存到配置文件中，下一次开启服务直接运行<code>./odoo-bin</code>，将会直接使用最后一次保存的选项。</p>
 <h2 id="_11">更新应用列表</h2>
 <p>在新添加的模块可以被安装前，我们还需要让Odoo更新它的模块列表。</p>
 <p>首先需要打开开发者模式(developer mode)，接着点击<strong>Update Apps List</strong>菜单项。</p>
 <p>在更新模块列表后，我们可以通过应用列表或搜索<code>todo</code>查找到我们刚安装的模块。</p>
+<h1 id="_12">创建模块的基础框架</h1>
+<p>Odoo的<code>scaffold</code>命令可以自动创建一个包含基础结构的目录，输入以下命令查看详细说明:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin scaffold --help
+</pre></div>
+
+
+<p>一个Odoo扩展模块就是一个包含<code>__manifest__.py</code>描述符文件的目录。</p>
+<p>同时为了可以被Python引用，还需要有<code>__init__.py</code>文件。</p>
+<p><code>__manifest__.py</code>文件中只包含一个Python字典，里面有很多属性，其中只有属性<code>name</code>是必需的。</p>
+<p>以下是一个<code>__manifest__.py</code>文件的内容:</p>
+<div class="hlcode"><pre><span class="p">{</span>
+  <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;To-Do Application&#39;</span><span class="p">,</span>
+  <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">&#39;Manage your personal To-Do tasks.&#39;</span><span class="p">,</span>
+  <span class="s">&#39;author&#39;</span><span class="p">:</span> <span class="s">&#39;Daniel Reis&#39;</span><span class="p">,</span>
+  <span class="s">&#39;depends&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;base&#39;</span><span class="p">],</span>
+  <span class="s">&#39;application&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>其中<code>depends</code>属性可以是一组需要的模块，当这个模块被安装的时候Odoo会自动将列出的依赖模块安装好。这个属性是非强制的，不过建议总是包含它，如果没有所需的依赖，就填入核心模块<code>base</code>。</p>
+<p><strong>注意</strong>：请确保所需依赖都分列在<code>depends</code>属性中，否则将会导致安装失败或加载错误。</p>
+<p>除了上述属性外，还建议加入以下属性:</p>
+<ul>
+<li><code>summary</code>作为模块的副标题显示</li>
+<li><code>version</code>版本号，默认是<code>1.0</code>，遵循<code>semantic versioning rules</code></li>
+<li><code>license</code>，默认是<code>LGPL-3</code></li>
+<li><code>website</code></li>
+<li><code>category</code>模块的功能分类，默认是<code>Uncategorized</code></li>
+</ul>
+<p>还有其他可以使用的属性:</p>
+<ul>
+<li><code>installable</code>属性默认为<code>True</code>，当为<code>False</code>时禁用模块</li>
+<li><code>auto_install</code>如果为<code>True</code>，则表示该模块及其依赖将会被自动安装</li>
+</ul>
+<h2 id="license">关于license</h2>
+<p>大部分Odoo模块都是使用<code>GNU Lesser General Public License (LGPL)</code>和<code>Affero General Public License (AGPL)</code>。前者允许商用并且无需公布相关源码，后者则是更加严格的开源许可，要求公开源码。</p>
+<h2 id="_13">安装新模块</h2>
+<p>要安装新增的模块，首先需要开启<strong>开发者模式</strong>，然后选择<strong>Update Apps List</strong>手动更新列表，然后在搜索框输入新增的模块或app的名字即可查找到，点击Install进行安装。</p>
+<p><strong>注意</strong>：如果有多个数据库，请确保使用了正确的那一个，在后台页面的用户名旁的小括号内可以看到当前使用的数据库的名称。手动强制使用对应数据库的一个方法就是加入<code>--db-filter=^MYDB$</code>选项。</p>
+<h1 id="_14">升级模块</h1>
+<p>当数据文档或代码有变化，需要应用更改时，就需要重启odoo的服务，以<code>todo_app</code>为例可以这样对模块进行升级:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>./odoo-bin -d todo -u todo_app
+</pre></div>
+
+
+<p>其中<code>-u</code>选项(或<code>--update</code>)需要<code>-d</code>选项指定使用的数据库，并且可以接受一组以逗号分隔的模块，进行批量升级。例如<code>-u todo_app,mail</code>。</p>
+<p><strong>注意</strong>：升级模块列表以及卸载模块，目前均不支持在命令行中进行操作，它们都只能通过网页在<code>Apps</code>菜单进行操作。</p>
+<h1 id="_15">服务器开发模式</h1>
+<p>在开启Odoo服务器实例时加上<code>--dev=all</code>选项可以开启开发模式。</p>
+<p>开发者模式为开发提供了一些便利的特性，最重要的两点是：</p>
+<ul>
+<li>只要有Python文件被保存，就会自动重新加载Python代码，免去了手动重启服务器的步骤</li>
+<li>直接从<code>XML</code>文件读取视图的定义，避免了手动更新模块</li>
+</ul>
+<p><code>--dev</code>选项可以接受一组以逗号分隔的选项，<code>all</code>适用于大部分时候。</p>
 	</article>
 
 	
@@ -245,7 +304,7 @@
                 <div class="row">
                     <div class="span6">
                         <p class="copyright">
-                            Copyright © 2017 Ruter. Site Generated 2017-01-24 17:48:50
+                            Copyright © 2017 Ruter. Site Generated 2017-01-29 13:47:28
                         </p>
                     </div>
                     <div class="span6">
