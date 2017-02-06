@@ -1,7 +1,7 @@
 ---
 title: "Odoo"
 date: 2017-01-24 12:32
-updated: 2017-01-29 12:35
+updated: 2017-02-06 16:20
 tag: Odoo10
 ---
 
@@ -62,7 +62,12 @@ Odoo默认监听`8069`端口，启动实例后可通过`http://<server-address>:
 $ sudo createuser --superuser $(whoami)
 ```
 
-**注意**: 实际操作时这里可能会出现无法创建的错误，请根据具体错误查询后自行更正操作。
+如果出现`createuser: could not connect to database postgres: FATAL: role "root" does not exist`这个错误的话，使用如下命令解决:
+
+```bash
+$ sudo -u postgres -i
+$ createuser --superuser username
+```
 
 创建新数据库用`createdb`命令:
 
