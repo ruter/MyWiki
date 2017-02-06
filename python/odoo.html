@@ -95,7 +95,7 @@
         <div class="post-meta clearfix">
                 <span class="date">2017-01-24 12:32</span>
                 
-                	Updated: <span class="date">2017-01-29 12:35</span>
+                	Updated: <span class="date">2017-02-06 16:20</span>
                 
         </div><!-- end of post meta -->
 
@@ -144,7 +144,12 @@
 </pre></div>
 
 
-<p><strong>注意</strong>: 实际操作时这里可能会出现无法创建的错误，请根据具体错误查询后自行更正操作。</p>
+<p>如果出现<code>createuser: could not connect to database postgres: FATAL: role "root" does not exist</code>这个错误的话，使用如下命令解决:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>sudo -u postgres -i
+<span class="nv">$ </span>createuser --superuser username
+</pre></div>
+
+
 <p>创建新数据库用<code>createdb</code>命令:</p>
 <div class="hlcode"><pre><span class="nv">$ </span>createdb demo
 </pre></div>
@@ -305,7 +310,7 @@
                 <div class="row">
                     <div class="span6">
                         <p class="copyright">
-                            Copyright © 2017 Ruter. Site Generated 2017-01-29 14:34:19
+                            Copyright © 2017 Ruter. Site Generated 2017-02-06 16:25:28
                         </p>
                     </div>
                     <div class="span6">
