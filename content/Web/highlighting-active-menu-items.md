@@ -8,7 +8,7 @@ tag: Jinja2
 
 一般情况下我们会将导航栏写入到`base.html`中，作为基础模板使用。我们把导航栏的选项和相应的信息定义成一个列表，然后通过`active_page`设置处于active状态的菜单项：
 
-```html
+```jinja2
 {% set navigation_bar = [
     ('/', 'index', 'Index'),
     ('/blog/', 'blog', 'Blog'),
@@ -29,7 +29,7 @@ tag: Jinja2
 
 其中`active_page`是在我们的子模板中进行设置的，假设当前页面是`index.html`：
 
-```html
+```jinja2
 {% extends "base.html" %}
 {% set active_page = "index" %}
 ...
