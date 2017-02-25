@@ -83,7 +83,7 @@
 		        
 		        	
 		        
-		        <li><a href="/MyWiki/#python">python</a> <span class="divider">/</span></li>
+		        <li><a href="/MyWiki/#Web">Web</a> <span class="divider">/</span></li>
 	        
 	    
       	<li class="active">Jinja2高亮active状态菜单项</li>
@@ -99,16 +99,16 @@
 
         <p>通常我们网站的导航条选项都会有<code>active</code>属性以明显提示我们所处在哪个菜单项之下，在<code>Jinja2</code>中要实现这样的效果并不难做到。</p>
 <p>一般情况下我们会将导航栏写入到<code>base.html</code>中，作为基础模板使用。我们把导航栏的选项和相应的信息定义成一个列表，然后通过<code>active_page</code>设置处于active状态的菜单项：</p>
-<div class="hlcode"><pre>{% set navigation_bar = [
-    (&#39;/&#39;, &#39;index&#39;, &#39;Index&#39;),
-    (&#39;/blog/&#39;, &#39;blog&#39;, &#39;Blog&#39;),
-    (&#39;/about/&#39;, &#39;about&#39;, &#39;About&#39;)
-] -%}
+<div class="hlcode"><pre><span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">navigation_bar</span> <span class="o">=</span> <span class="err">[</span>
+    <span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;Index&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;/blog/&#39;</span><span class="p">,</span> <span class="s1">&#39;blog&#39;</span><span class="p">,</span> <span class="s1">&#39;Blog&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;/about/&#39;</span><span class="p">,</span> <span class="s1">&#39;about&#39;</span><span class="p">,</span> <span class="s1">&#39;About&#39;</span><span class="p">)</span>
+<span class="cp">]</span> -%}
 {% set active_page = active_page|default(&#39;index&#39;) -%}
 ...
 <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;navigation&quot;</span><span class="nt">&gt;</span>
 {% for href, id, caption in navigation_bar %}
-  <span class="nt">&lt;li</span><span class="err">{%</span> <span class="na">if</span> <span class="na">id =</span><span class="s">=</span> <span class="na">active_page</span> <span class="err">%}</span> <span class="na">class=</span><span class="s">&quot;active&quot;</span><span class="err">{%</span> <span class="na">endif</span>
+  <span class="nt">&lt;li</span><span class="err">{%</span> <span class="err">if</span> <span class="na">id =</span><span class="s">=</span> <span class="err">active_page</span> <span class="err">%}</span> <span class="na">class=</span><span class="s">&quot;active&quot;</span><span class="err">{%</span> <span class="err">endif</span>
   <span class="err">%}</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ href|e }}&quot;</span><span class="nt">&gt;</span>{{ caption|e }}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
 {% endfor %}
 <span class="nt">&lt;/ul&gt;</span>
@@ -118,9 +118,9 @@
 
 <p>这里通过遍历<code>navigation_bar</code>来为导航栏的选项加上链接以及标题，并且通过遍历出来的<code>id</code>和<code>active_page</code>的值相比较以确定当前项是否是active状态。</p>
 <p>其中<code>active_page</code>是在我们的子模板中进行设置的，假设当前页面是<code>index.html</code>：</p>
-<div class="hlcode"><pre>{% extends &quot;base.html&quot; %}
-{% set active_page = &quot;index&quot; %}
-...
+<div class="hlcode"><pre><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">active_page</span> <span class="o">=</span> <span class="s2">&quot;index&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">...</span>
 </pre></div>
 
 
@@ -155,7 +155,7 @@
                 <div class="row">
                     <div class="span6">
                         <p class="copyright">
-                            Copyright © 2017 Ruter. Site Generated 2017-02-25 10:37:40
+                            Copyright © 2017 Ruter. Site Generated 2017-02-25 10:39:28
                         </p>
                     </div>
                     <div class="span6">
