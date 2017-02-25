@@ -7,7 +7,7 @@
 	<!-- META TAGS -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>在线应用 - Ruter's Knowledge Wiki</title>
+	<title>Jinja2高亮active状态菜单项 - Ruter's Knowledge Wiki</title>
     <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
     <meta name="description" content="It's a knowledge management wiki."/>
     <link rel="shortcut icon" href="/MyWiki/static/images/favicon.ico" type="image/x-icon">
@@ -83,58 +83,48 @@
 		        
 		        	
 		        
-		        <li><a href="/MyWiki/#bookmarks">bookmarks</a> <span class="divider">/</span></li>
+		        <li><a href="/MyWiki/#python">python</a> <span class="divider">/</span></li>
 	        
 	    
-      	<li class="active">在线应用</li>
+      	<li class="active">Jinja2高亮active状态菜单项</li>
 	</ul>
 
 	<article class=" type-post format-standard hentry clearfix">
-        <h1 class="post-title">在线应用</h1>
+        <h1 class="post-title">Jinja2高亮active状态菜单项</h1>
 
         <div class="post-meta clearfix">
-                <span class="date">2016-11-09 00:31</span>
-                
-                	Updated: <span class="date">2016-11-09 15:10</span>
+                <span class="date">2017-02-23 21:51</span>
                 
         </div><!-- end of post meta -->
 
-        <h1 id="_1">编程</h1>
-<ul>
-<li><a href="http://ideone.com/">Ideone</a> - Online Compiler and IDE &gt;&gt; C/C++, Java, PHP, Python, Perl and 40+ other compilers and interpreters</li>
-<li><a href="http://ondras.zarovi.cz/sql/demo/">WWW SQL Designer</a></li>
-</ul>
-<h1 id="_2">图形图像</h1>
-<ul>
-<li><a href="http://www.polaxiong.com/editor">泼辣修图</a></li>
-<li><a href="http://xiuxiu.web.meitu.com/?xiuxiu">美图秀秀网页版</a></li>
-<li><a href="http://yotuku.cn/">极简图床</a></li>
-<li><a href="https://www.processon.com/">ProcessOn</a> - 免费在线作图，实时协作</li>
-<li><a href="http://icon.wuruihong.com/">图标工场</a> - 移动应用图标生成工具，一键生成所有尺寸的应用图标</li>
-<li><a href="https://whatanime.ga/">WAIT: What Anime Is This?</a> - Anime Reverse Search Engine</li>
-<li><a href="http://waifu2x.udp.jp/index.zh-CN.html">waifu2x</a> - 本程序使用卷积神经网络对动漫风格的图片进行放大操作</li>
-</ul>
-<h1 id="_3">文档处理</h1>
-<ul>
-<li><a href="http://www.docpe.com/">档铺网</a> - 专注于提供在线文档编辑、处理和转换的解决方案。</li>
-<li><a href="http://www.freepdfconvert.com/">PDF Converter</a></li>
-<li><a href="http://cn.diywz.com/">文档转换</a></li>
-<li><a href="https://www.office.com/">Office Online</a></li>
-</ul>
-<h1 id="_4">记录&amp;协作</h1>
-<ul>
-<li><a href="https://web.any.do/">Any.do</a> - Best To-do list &amp; Task Manager.</li>
-<li><a href="https://www.yinxiang.com/">印象笔记</a></li>
-<li><a href="https://worktile.com/">Worktile</a> - 更好用的企业协作平台</li>
-<li><a href="https://trello.com/">Trello</a></li>
-</ul>
-<h1 id="_5">其他</h1>
-<ul>
-<li><a href="http://crontab.guru/">crontab.guru</a> - The quick and simple editor for cron schedule expressions.</li>
-<li><a href="http://www.myfonts.com/WhatTheFont/">WhatTheFont</a> - Submit an image to WhatTheFont to find the closest matches in our database. </li>
-<li><a href="https://apps.evozi.com/apk-downloader/">APK Downloader</a></li>
-<li><a href="https://btso.pw/">BTSOW</a> - The free online torrent file to magnet link conversion, magnet link to torrent file conversion, Search magnet link and Search torrent file.</li>
-</ul>
+        <p>通常我们网站的导航条选项都会有<code>active</code>属性以明显提示我们所处在哪个菜单项之下，在<code>Jinja2</code>中要实现这样的效果并不难做到。</p>
+<p>一般情况下我们会将导航栏写入到<code>base.html</code>中，作为基础模板使用。我们把导航栏的选项和相应的信息定义成一个列表，然后通过<code>active_page</code>设置处于active状态的菜单项：</p>
+<div class="hlcode"><pre>{% set navigation_bar = [
+    (&#39;/&#39;, &#39;index&#39;, &#39;Index&#39;),
+    (&#39;/blog/&#39;, &#39;blog&#39;, &#39;Blog&#39;),
+    (&#39;/about/&#39;, &#39;about&#39;, &#39;About&#39;)
+] -%}
+{% set active_page = active_page|default(&#39;index&#39;) -%}
+...
+<span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;navigation&quot;</span><span class="nt">&gt;</span>
+{% for href, id, caption in navigation_bar %}
+  <span class="nt">&lt;li</span><span class="err">{%</span> <span class="na">if</span> <span class="na">id =</span><span class="s">=</span> <span class="na">active_page</span> <span class="err">%}</span> <span class="na">class=</span><span class="s">&quot;active&quot;</span><span class="err">{%</span> <span class="na">endif</span>
+  <span class="err">%}</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ href|e }}&quot;</span><span class="nt">&gt;</span>{{ caption|e }}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+{% endfor %}
+<span class="nt">&lt;/ul&gt;</span>
+...
+</pre></div>
+
+
+<p>这里通过遍历<code>navigation_bar</code>来为导航栏的选项加上链接以及标题，并且通过遍历出来的<code>id</code>和<code>active_page</code>的值相比较以确定当前项是否是active状态。</p>
+<p>其中<code>active_page</code>是在我们的子模板中进行设置的，假设当前页面是<code>index.html</code>：</p>
+<div class="hlcode"><pre>{% extends &quot;base.html&quot; %}
+{% set active_page = &quot;index&quot; %}
+...
+</pre></div>
+
+
+<p>当我访问<code>index.html</code>这个页面时，<code>active_page</code>和<code>id</code>为<code>index</code>的那一项相匹配，即<code>Index</code>为active状态。</p>
 	</article>
 
 	
