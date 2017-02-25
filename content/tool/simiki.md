@@ -1,6 +1,7 @@
 ---
 title: "Simiki"
 date: 2016-11-01 10:12
+update: 2017-02-25 10:10
 tag: 模板, wiki
 ---
 
@@ -42,3 +43,16 @@ tag: wiki, template
 <link rel="shortcut icon" href="{{ site.root }}/favicon.ico" type="image/x-icon">
 <link rel="icon" href="{{ site.root }}/favicon.ico" type="image/x-icon">
 ```
+# 更换电脑后使用
+
+在Github的[issue#23](https://github.com/tankywoo/simiki/issues/23)中有相关讨论，下面引用作者的其中一条[回复](https://github.com/tankywoo/simiki/issues/23#issuecomment-62398867):
+
+> 以github pages with domain 为例，master分支保存源文件、gh-pages分支保存生成的output内容。换一台电脑clone:
+>
+> ```bash
+> $ git clone -b master git@github.com:username/projectname.git
+> $ cd projectname/
+> $ git clone -b gh-pages git@github.com:username/projectname.git output
+> ```
+>
+> 就可以了。
