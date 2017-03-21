@@ -7,7 +7,7 @@
 	<!-- META TAGS -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>解决JS浮点运算精度问题的一个方法 - Ruter's Knowledge Wiki</title>
+	<title>调用iframe中的函数或方法 - Ruter's Knowledge Wiki</title>
     <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
     <meta name="description" content="It's a knowledge management wiki."/>
     <link rel="shortcut icon" href="/MyWiki/static/images/favicon.ico" type="image/x-icon">
@@ -86,36 +86,21 @@
 		        <li><a href="/MyWiki/#Web">Web</a> <span class="divider">/</span></li>
 	        
 	    
-      	<li class="active">解决JS浮点运算精度问题的一个方法</li>
+      	<li class="active">调用iframe中的函数或方法</li>
 	</ul>
 
 	<article class=" type-post format-standard hentry clearfix">
-        <h1 class="post-title">解决JS浮点运算精度问题的一个方法</h1>
+        <h1 class="post-title">调用iframe中的函数或方法</h1>
 
         <div class="post-meta clearfix">
-                <span class="date">2017-03-14 17:31</span>
+                <span class="date">2017-03-21 19:43</span>
                 
         </div><!-- end of post meta -->
 
-        <p>在 JS 中进行浮点运算会出现精度有误差的问题，例如：<code>1 - 0.9</code>会得出<code>0.09999999999999998</code>这样的结果。</p>
-<p>可是对整数进行运算就不会出现这种情况。根据这个特点我们可以对浮点数先进行处理后再运算，将浮点数乘以 10 的 n 次方，运算完成后再将结果除以 10 的 n 次方，其中 n 为对应浮点数小数位的位数：</p>
-<div class="hlcode"><pre><span class="kd">var</span> <span class="nx">formatFloat</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">dig</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">pow</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">dig</span><span class="p">));</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">dig</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">num</span> <span class="o">/</span> <span class="nx">pow</span><span class="p">;</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">dig</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">num</span> <span class="o">*</span> <span class="nx">pow</span><span class="p">;</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">num</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+        <p>假设 A 页面有一个<code>iframe</code>的 ID 为<code>mainfr</code>，链接的是 B 页面。</p>
+<p>其中 B 页面有一个函数<code>callSub()</code>，如果要在 A 页面中对它进行调用，可以这样操作：</p>
+<div class="hlcode"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#mainfr&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nx">callSub</span><span class="p">();</span>
 </pre></div>
-
-
-<blockquote>
-<p>注：<code>num</code>为要处理的数值，<code>dig</code>为小数点的位数</p>
-</blockquote>
-<p>对前面的例子进行计算：<code>formatFloat(formatFloat(1, 1) - formatFloat(0.9, 1), -1)</code>可以得出正确的结果 <code>0.1</code>。</p>
 	</article>
 
 	
@@ -124,7 +109,7 @@
 	    <span class="tags">
             <strong>Related:&nbsp;&nbsp;</strong>
             
-            	<a href="/MyWiki/Web/how-to-call-methods-or-functions-in-iframe.html" rel="tag">调用iframe中的函数或方法</a>
+            	<a href="/MyWiki/Web/fix-javascript-precision.html" rel="tag">解决JS浮点运算精度问题的一个方法</a>
             
 	    </span>
 	</div>
