@@ -130,6 +130,9 @@
 <p>CentOS 7使用<code>firewalld</code>代替了原来的<code>iptables</code>，相关端口命令如下</p>
 <p>开启端口</p>
 <div class="hlcode"><pre><span class="n">firewall</span><span class="o">-</span><span class="n">cmd</span> <span class="o">--</span><span class="n">zone</span><span class="o">=</span><span class="n">public</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span> <span class="o">--</span><span class="n">permanent</span>
+
+<span class="cp"># 打开多个端口</span>
+<span class="n">firewall</span><span class="o">-</span><span class="n">cmd</span> <span class="o">--</span><span class="n">zone</span><span class="o">=</span><span class="n">public</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="p">{</span><span class="mi">10010</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span><span class="mi">10080</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span><span class="mi">10090</span><span class="o">/</span><span class="n">tcp</span><span class="p">}</span> <span class="o">--</span><span class="n">permanent</span>
 </pre></div>
 
 
@@ -175,7 +178,7 @@
                 <div class="row">
                     <div class="span6">
                         <p class="copyright">
-                            Copyright © 2017 Ruter. Site Generated 2017-03-21 19:52:24
+                            Copyright © 2017 Ruter. Site Generated 2017-03-26 18:09:09
                         </p>
                     </div>
                     <div class="span6">
