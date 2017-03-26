@@ -45,6 +45,9 @@ CentOS 7使用`firewalld`代替了原来的`iptables`，相关端口命令如下
 
 ```
 firewall-cmd --zone=public --add-port=80/tcp --permanent
+
+# 打开多个端口
+firewall-cmd --zone=public --add-port={10010/tcp,10080/tcp,10090/tcp} --permanent
 ```
 
 含义
