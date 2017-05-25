@@ -7,7 +7,7 @@ keywords: knowledge, wiki, python, Ruter
 description: It's a knowledge management wiki.
 author: Ruter
 
-root: /MyWiki
+root: /
 
 theme: knowledge
 
