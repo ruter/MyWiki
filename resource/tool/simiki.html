@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="zh-CN"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="zh-CN"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="zh-CN"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="zh-CN"> <!--<![endif]-->
+<head>
+	<!-- META TAGS -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Simiki - Ruter's Knowledge Wiki</title>
+    <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
+    <meta name="description" content="It's a knowledge management wiki."/>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+
+    <!-- Style Sheet-->
+    <link rel='stylesheet' id='bootstrap-css-css'  href='/static/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='responsive-css-css'  href='/static/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='main-css-css'  href='/static/css/main5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel="Stylesheet" type="text/css" href="/static/css/zenburn.css">
+    <!-- <link rel="Stylesheet" type="text/css" href="/static/css/monokai.css"> -->
+    <!-- <link rel='stylesheet' id='custom-css-css'  href='/static/css/custom5152.html?ver=1.0' type='text/css' media='all' /> -->
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+     <script src="js/html5.js"></script></script>
+    <![endif]-->
+</head>
+<body>
+	<!-- Start of Header -->
+	<div class="header-wrapper">
+        <header>
+            <div class="container">
+                <div class="logo-container">
+                    <!-- Website Logo -->
+                    <a href=""  title="Ruter's Knowledge Wiki">
+                            <img src="/static/images/logo.png" alt="Ruter's Knowledge Wiki">
+                    </a>
+                    <span class="tag-line">My personal knowledge management</span>
+                </div>
+                <!-- Start of Main Navigation -->
+                <nav class="main-nav">
+                    <div class="menu-top-menu-container">
+                        <ul id="menu-top-menu" class="clearfix">
+                            <li><a href="">Home</a></li>
+                            <li><a href="http://ruter.sundaystart.net">Blog</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End of Main Navigation -->
+            </div>
+        </header>
+	</div>
+	<!-- End of Header -->
+
+	<!-- Start of Search Wrapper -->
+	<!-- <div class="search-area-wrapper">
+        <div class="search-area container">
+            <h3 class="search-header">Wiki it!</h3>
+            <p class="search-tag-line">You can enter what you are looking for!</p>
+
+            <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+                    <input class="search-term required st-default-search-input" type="text" id="s" name="s" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Type your search terms here" title="* Please enter a search term!" />
+                    <input class="search-btn" type="submit" value="Search" />
+                    <div id="search-error-container"></div>
+            </form>
+        </div>
+	</div> -->
+	<!-- End of Search Wrapper -->
+
+	<!-- Start of Page Container -->
+    <div class="page-container">
+        <div class="container">
+            <div class="row">
+            	<!-- start of page content -->
+                <div class="span8 page-content">
+                	
+	<ul class="breadcrumb">
+		<li><a href="">Home</a><span class="divider">/</span></li>
+		
+	        
+		        
+		        	
+		        
+		        <li><a href="/#tool">tool</a> <span class="divider">/</span></li>
+	        
+	    
+      	<li class="active">Simiki</li>
+	</ul>
+
+	<article class=" type-post format-standard hentry clearfix">
+        <h1 class="post-title">Simiki</h1>
+
+        <div class="post-meta clearfix">
+                <span class="date">2016-11-01 10:12</span>
+                
+        </div><!-- end of post meta -->
+
+        <h1 id="_1">页面头信息</h1>
+<p>wiki页面的元数据使用的是YAML Front Matter格式，常用以下头作为模板</p>
+<div class="hlcode"><pre><span class="o">---</span>
+<span class="nl">title:</span> <span class="s">&quot;页面头信息&quot;</span>
+<span class="nl">date:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">1</span> <span class="mo">00</span><span class="o">:</span><span class="mo">00</span>
+<span class="nl">updated:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">1</span> <span class="mi">10</span><span class="o">:</span><span class="mo">00</span>
+<span class="nl">collection:</span> <span class="n">Document</span>
+<span class="nl">tag:</span> <span class="n">wiki</span><span class="p">,</span> <span class="n">template</span>
+<span class="o">---</span>
+</pre></div>
+
+
+<h1 id="_2">生成目录</h1>
+<p>在YAML Front Matter下面, wiki内容的顶部，添加一行</p>
+<div class="hlcode"><pre><span class="o">---</span>
+<span class="nb">title</span><span class="p">:</span> <span class="s2">&quot;生成目录&quot;</span>
+<span class="kt">date</span><span class="p">:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">1</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+<span class="nx">updated</span><span class="p">:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">00</span>
+<span class="nx">collection</span><span class="p">:</span> <span class="nb">Document</span>
+<span class="kt">tag</span><span class="p">:</span> <span class="nx">wiki</span><span class="p">,</span> <span class="nx">template</span>
+<span class="o">---</span>
+
+<span class="err">[</span><span class="nx">TOC</span><span class="cp">]</span>
+
+<span class="nt">&lt;content&gt;</span>
+</pre></div>
+
+
+<h1 id="favicon">Favicon</h1>
+<p>将文件名为<code>favicon.ico</code>的icon文件放在wiki根目录下，在主题模板添加</p>
+<div class="hlcode"><pre><span class="o">&lt;</span><span class="n">link</span> <span class="n">rel</span><span class="o">=</span><span class="s">&quot;shortcut icon&quot;</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;{{ site.root }}/favicon.ico&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;image/x-icon&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">link</span> <span class="n">rel</span><span class="o">=</span><span class="s">&quot;icon&quot;</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;{{ site.root }}/favicon.ico&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;image/x-icon&quot;</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<h1 id="_3">更换电脑后使用</h1>
+<p>在Github的<a href="https://github.com/tankywoo/simiki/issues/23">issue#23</a>中有相关讨论，下面引用作者的其中一条<a href="https://github.com/tankywoo/simiki/issues/23#issuecomment-62398867">回复</a>:</p>
+<blockquote>
+<p>以github pages with domain 为例，master分支保存源文件、gh-pages分支保存生成的output内容。换一台电脑clone:</p>
+<p><code>bash
+$ git clone -b master git@github.com:username/projectname.git
+$ cd projectname/
+$ git clone -b gh-pages git@github.com:username/projectname.git output</code></p>
+<p>就可以了。</p>
+</blockquote>
+	</article>
+
+	
+
+                </div>
+                <!-- end of page content -->
+
+                <!-- start of sidebar -->
+                <aside class="span4 page-sidebar">
+                	<section class="widget">
+                        <div class="support-widget">
+                            <h3 class="title">Hi there!</h3>
+                            <p class="intro">Hope you find something useful :)</p>
+                        </div>
+                	</section>
+                </aside>
+                <!-- end of sidebar -->
+            </div>
+        </div>
+    </div>
+    <!-- End of Page Container -->
+
+    <!-- Start of Footer -->
+    <footer id="footer-wrapper">
+        <!-- Footer Bottom -->
+        <div id="footer-bottom-wrapper">
+            <div id="footer-bottom" class="container">
+                <div class="row">
+                    <div class="span6">
+                        <p class="copyright">
+                            Copyright © 2017 Ruter. Site Generated 2017-05-25 14:10:41
+                        </p>
+                    </div>
+                    <div class="span6">
+                        <!-- Social Navigation -->
+                        <ul class="social-nav clearfix">
+                                <li class="linkedin"><a target="_blank" href="#"></a></li>
+                                <li class="stumble"><a target="_blank" href="#"></a></li>
+                                <li class="google"><a target="_blank" href="#"></a></li>
+                                <li class="deviantart"><a target="_blank" href="#"></a></li>
+                                <li class="flickr"><a target="_blank" href="#"></a></li>
+                                <li class="skype"><a target="_blank" href="skype:#?call"></a></li>
+                                <li class="rss"><a target="_blank" href="#"></a></li>
+                                <li class="twitter"><a target="_blank" href="#"></a></li>
+                                <li class="facebook"><a target="_blank" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Footer Bottom -->
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- script -->
+    <!-- <script type='text/javascript' src='/static/js/jquery-1.8.3.min.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.easing.1.3.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.liveSearch.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.form.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.validate.min.js'></script> -->
+    <script type="text/javascript">
+      (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+      })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+      
+      _st('install','oXs1TQsrB1oY4LHhr7nb','2.0.0');
+    </script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="zh-CN"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="zh-CN"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="zh-CN"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="zh-CN"> <!--<![endif]-->
+<head>
+	<!-- META TAGS -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Odoo - Ruter's Knowledge Wiki</title>
+    <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
+    <meta name="description" content="It's a knowledge management wiki."/>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+
+    <!-- Style Sheet-->
+    <link rel='stylesheet' id='bootstrap-css-css'  href='/static/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='responsive-css-css'  href='/static/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='main-css-css'  href='/static/css/main5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel="Stylesheet" type="text/css" href="/static/css/zenburn.css">
+    <!-- <link rel="Stylesheet" type="text/css" href="/static/css/monokai.css"> -->
+    <!-- <link rel='stylesheet' id='custom-css-css'  href='/static/css/custom5152.html?ver=1.0' type='text/css' media='all' /> -->
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+     <script src="js/html5.js"></script></script>
+    <![endif]-->
+</head>
+<body>
+	<!-- Start of Header -->
+	<div class="header-wrapper">
+        <header>
+            <div class="container">
+                <div class="logo-container">
+                    <!-- Website Logo -->
+                    <a href=""  title="Ruter's Knowledge Wiki">
+                            <img src="/static/images/logo.png" alt="Ruter's Knowledge Wiki">
+                    </a>
+                    <span class="tag-line">My personal knowledge management</span>
+                </div>
+                <!-- Start of Main Navigation -->
+                <nav class="main-nav">
+                    <div class="menu-top-menu-container">
+                        <ul id="menu-top-menu" class="clearfix">
+                            <li><a href="">Home</a></li>
+                            <li><a href="http://ruter.sundaystart.net">Blog</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End of Main Navigation -->
+            </div>
+        </header>
+	</div>
+	<!-- End of Header -->
+
+	<!-- Start of Search Wrapper -->
+	<!-- <div class="search-area-wrapper">
+        <div class="search-area container">
+            <h3 class="search-header">Wiki it!</h3>
+            <p class="search-tag-line">You can enter what you are looking for!</p>
+
+            <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+                    <input class="search-term required st-default-search-input" type="text" id="s" name="s" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Type your search terms here" title="* Please enter a search term!" />
+                    <input class="search-btn" type="submit" value="Search" />
+                    <div id="search-error-container"></div>
+            </form>
+        </div>
+	</div> -->
+	<!-- End of Search Wrapper -->
+
+	<!-- Start of Page Container -->
+    <div class="page-container">
+        <div class="container">
+            <div class="row">
+            	<!-- start of page content -->
+                <div class="span8 page-content">
+                	
+	<ul class="breadcrumb">
+		<li><a href="">Home</a><span class="divider">/</span></li>
+		
+	        
+		        
+		        	
+		        
+		        <li><a href="/#python">python</a> <span class="divider">/</span></li>
+	        
+	    
+      	<li class="active">Odoo</li>
+	</ul>
+
+	<article class=" type-post format-standard hentry clearfix">
+        <h1 class="post-title">Odoo</h1>
+
+        <div class="post-meta clearfix">
+                <span class="date">2017-01-24 12:32</span>
+                
+                	Updated: <span class="date">2017-02-06 16:20</span>
+                
+        </div><!-- end of post meta -->
+
+        <h1 id="_1">注意事项</h1>
+<ol>
+<li><code>Odoo</code>不支持<code>Python3</code></li>
+<li>不能使用<code>root</code>身份开启odoo服务</li>
+</ol>
+<h1 id="odoo">安装Odoo</h1>
+<h2 id="_2">安装基础依赖</h2>
+<div class="hlcode"><pre><span class="c"># 安装系统更新</span>
+<span class="nv">$ </span>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade
+<span class="c"># 安装Git和npm</span>
+<span class="nv">$ </span>sudo apt-get install git
+<span class="nv">$ </span>sudo apt-get install npm
+<span class="c"># 创建nodejs软链</span>
+<span class="nv">$ </span>sudo ln -s /usr/bin/nodejs /usr/bin/node
+<span class="c"># 安装less</span>
+<span class="nv">$ </span>sudo npm install -g less less-plugin-clean-css
+</pre></div>
+
+
+<h2 id="odoo_1">从源码安装Odoo</h2>
+<div class="hlcode"><pre><span class="c"># 创建工作目录</span>
+<span class="nv">$ </span>mkdir ~/odoo-dev
+<span class="nv">$ </span><span class="nb">cd</span> ~/odoo-dev
+<span class="c"># 下载Odoo源码</span>
+<span class="nv">$ </span>git clone https://github.com/odoo/odoo.git -b 10.0 --depth<span class="o">=</span>1
+<span class="c"># 安装Odoo的系统依赖</span>
+<span class="nv">$ </span>./odoo/setup/setup_dev.py setup_deps
+<span class="c"># 安装PostgreSQL</span>
+<span class="nv">$ </span>./odoo/setup/setup_dev.py setup_pg
+</pre></div>
+
+
+<h2 id="tip">Tip</h2>
+<p>启动Odoo服务器实例用命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin
+</pre></div>
+
+
+<p>Odoo默认监听<code>8069</code>端口，启动实例后可通过<code>http://&lt;server-address&gt;:8069</code>访问。</p>
+<h1 id="odoo_2">初始化新的Odoo数据库</h1>
+<p>在创建数据库前需保证当前用户是<code>PostgreSQL</code>的超级用户:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>sudo createuser --superuser <span class="k">$(</span>whoami<span class="k">)</span>
+</pre></div>
+
+
+<p>如果出现<code>createuser: could not connect to database postgres: FATAL: role "root" does not exist</code>这个错误的话，使用如下命令解决:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>sudo -u postgres -i
+<span class="nv">$ </span>createuser --superuser username
+</pre></div>
+
+
+<p>创建新数据库用<code>createdb</code>命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>createdb demo
+</pre></div>
+
+
+<p>将数据库初始化为Odoo的数据模式，需要使用<code>-d</code>选项:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin -d demo
+</pre></div>
+
+
+<p><strong>注意</strong>: 初始化数据库默认会添加演示数据，如果不需要，只需添加<code>--without-demo-data=all</code>即可。</p>
+<h2 id="_3">数据库管理</h2>
+<p>除了可以创建空的数据库外，还能从现有的数据库进行拷贝，以方便测试等使用。在开始之前需要保证关闭了源数据库的所有连接，然后执行以下命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>createdb --template<span class="o">=</span>demo demo-test
+</pre></div>
+
+
+<p>列出现有数据库，可以用如下命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>psql -l
+</pre></div>
+
+
+<p>删除数据库使用:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>dropdb demo-test
+</pre></div>
+
+
+<h1 id="odoo_3">Odoo配置选项</h1>
+<h2 id="_4">配置文件</h2>
+<p>Odoo的大部分配置选项都会存储在配置文件里，默认使用的是<code>.odoorc</code>，位于<code>home</code>下。</p>
+<p>初次安装Odoo，<code>.odoorc</code>配置文件是不会自动生成的，如果它不存在，我们应该用<code>--save</code>选项创建默认配置文件，保存最近一次运行实例的配置:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin --save --stop-after-init
+</pre></div>
+
+
+<p>其中<code>--stop-after-init</code>选项会在完成所有动作后自动停止服务。一般用于运行测试或检查模块是否正确安装。</p>
+<p>除了使用默认配置，我们还可以用<code>--conf=&lt;filepath&gt;</code>选项指定配置文件。</p>
+<h2 id="_5">改变监听端口</h2>
+<p>使用<code>--xmlrpc-port=&lt;port&gt;</code>命令选项可以更改Odoo服务监听的端口。改变监听端口可用于运行多个不同的Odoo实例，不同的实例可以使用相同的或不同的数据库。</p>
+<h2 id="_6">数据库过滤选项</h2>
+<p>使用数据库过滤选项可以保证Odoo服务只请求我们需要的数据库，以防止潜在的错误。</p>
+<p>使用<code>--db-filter</code>选项以过滤数据库，它接受正则表达式，完全匹配数据库<code>demo</code>使用如下命令:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin --db-filter<span class="o">=</span>^demo<span class="err">$</span>
+</pre></div>
+
+
+<h2 id="_7">管理日志</h2>
+<p><code>--log-level</code>选项允许设置日志的级别，例如debug级别，可以使用<code>--log-level=debug</code>选项。</p>
+<p>日志输出默认是标准输出，即输出到控制台，可以使用<code>--logfile=&lt;filepath&gt;</code>选项指定输出到文件中。</p>
+<h1 id="_8">安装第三方模块</h1>
+<h2 id="_9">社区的模块</h2>
+<p>Odoo有App Store，地址是<a href="apps.odoo.com">apps.odoo.com</a>。除了官方商店，还有很多社区贡献和维护的模块，可以在GitHub仓库<a href="https://github.com/OCA/">https://github.com/OCA/</a>获取。</p>
+<p>安装模块到Odoo，只需要将其拷贝到<code>addons</code>目录下即可，不过对于使用版本管理系统来管理代码而言，这种做法并不推荐。</p>
+<p>我们可以为自定义的模块指定不同的目录，以和官方的区分开。</p>
+<h2 id="_10">配置路径</h2>
+<p>以一个例子作为说明，先从GitHub下载代码，然后配置Odoo的<code>addons_path</code>让Odoo可以查找到自定义的模块:</p>
+<div class="hlcode"><pre><span class="nv">$ </span><span class="nb">cd</span> ~/odoo-dev
+<span class="nv">$ </span>git clone https://github.com/dreispt/todo_app.git -b 10.0
+</pre></div>
+
+
+<p>现在<code>/todo_app</code>和<code>/odoo</code>都在同一目录下，前者包含了我们需要的自定义模块。</p>
+<p>我们可以提供一个包含模块的目录路径的列表，让Odoo可以从这些路径里找到所需的模块。</p>
+<p>按如下命令启动Odoo，指定<code>addons_path</code>:</p>
+<div class="hlcode"><pre><span class="nv">$ </span><span class="nb">cd</span> ~/odoo-dev/odoo
+<span class="nv">$ </span>./odoo-bin -d demo --addons-path<span class="o">=</span><span class="s2">&quot;../todo_app,./addons&quot;</span>
+</pre></div>
+
+
+<p>指定<code>addons_path</code>后可以在命令中加入<code>--save</code>选项，将命令中的选项保存到配置文件中，下一次开启服务直接运行<code>./odoo-bin</code>，将会直接使用最后一次保存的选项。</p>
+<h2 id="_11">更新应用列表</h2>
+<p>在新添加的模块可以被安装前，我们还需要让Odoo更新它的模块列表。</p>
+<p>首先需要打开开发者模式(developer mode)，接着点击<strong>Update Apps List</strong>菜单项。</p>
+<p>在更新模块列表后，我们可以通过应用列表或搜索<code>todo</code>查找到我们刚安装的模块。</p>
+<h1 id="_12">创建模块的基础框架</h1>
+<p>Odoo的<code>scaffold</code>命令可以自动创建一个包含基础结构的目录，输入以下命令查看详细说明:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>~/odoo-dev/odoo/odoo-bin scaffold --help
+</pre></div>
+
+
+<p>一个Odoo扩展模块就是一个包含<code>__manifest__.py</code>描述符文件的目录。</p>
+<p>同时为了可以被Python引用，还需要有<code>__init__.py</code>文件。</p>
+<p><code>__manifest__.py</code>文件中只包含一个Python字典，里面有很多属性，其中只有属性<code>name</code>是必需的。</p>
+<p>以下是一个<code>__manifest__.py</code>文件的内容:</p>
+<div class="hlcode"><pre><span class="p">{</span>
+  <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;To-Do Application&#39;</span><span class="p">,</span>
+  <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">&#39;Manage your personal To-Do tasks.&#39;</span><span class="p">,</span>
+  <span class="s">&#39;author&#39;</span><span class="p">:</span> <span class="s">&#39;Daniel Reis&#39;</span><span class="p">,</span>
+  <span class="s">&#39;depends&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;base&#39;</span><span class="p">],</span>
+  <span class="s">&#39;application&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>其中<code>depends</code>属性可以是一组需要的模块，当这个模块被安装的时候Odoo会自动将列出的依赖模块安装好。这个属性是非强制的，不过建议总是包含它，如果没有所需的依赖，就填入核心模块<code>base</code>。</p>
+<p><strong>注意</strong>：请确保所需依赖都分列在<code>depends</code>属性中，否则将会导致安装失败或加载错误。</p>
+<p>除了上述属性外，还建议加入以下属性:</p>
+<ul>
+<li><code>summary</code>作为模块的副标题显示</li>
+<li><code>version</code>版本号，默认是<code>1.0</code>，遵循<code>semantic versioning rules</code></li>
+<li><code>license</code>，默认是<code>LGPL-3</code></li>
+<li><code>website</code></li>
+<li><code>category</code>模块的功能分类，默认是<code>Uncategorized</code></li>
+</ul>
+<p>还有其他可以使用的属性:</p>
+<ul>
+<li><code>installable</code>属性默认为<code>True</code>，当为<code>False</code>时禁用模块</li>
+<li><code>auto_install</code>如果为<code>True</code>，则表示该模块及其依赖将会被自动安装</li>
+</ul>
+<h2 id="license">关于license</h2>
+<p>大部分Odoo模块都是使用<code>GNU Lesser General Public License (LGPL)</code>和<code>Affero General Public License (AGPL)</code>。前者允许商用并且无需公布相关源码，后者则是更加严格的开源许可，要求公开源码。</p>
+<h2 id="_13">安装新模块</h2>
+<p>要安装新增的模块，首先需要开启<strong>开发者模式</strong>，然后选择<strong>Update Apps List</strong>手动更新列表，然后在搜索框输入新增的模块或app的名字即可查找到，点击Install进行安装。</p>
+<p><strong>注意</strong>：如果有多个数据库，请确保使用了正确的那一个，在后台页面的用户名旁的小括号内可以看到当前使用的数据库的名称。手动强制使用对应数据库的一个方法就是加入<code>--db-filter=^MYDB$</code>选项。</p>
+<h1 id="_14">升级模块</h1>
+<p>当数据文档或代码有变化，需要应用更改时，就需要重启odoo的服务，以<code>todo_app</code>为例可以这样对模块进行升级:</p>
+<div class="hlcode"><pre><span class="nv">$ </span>./odoo-bin -d todo -u todo_app
+</pre></div>
+
+
+<p>其中<code>-u</code>选项(或<code>--update</code>)需要<code>-d</code>选项指定使用的数据库，并且可以接受一组以逗号分隔的模块，进行批量升级。例如<code>-u todo_app,mail</code>。</p>
+<p><strong>注意</strong>：升级模块列表以及卸载模块，目前均不支持在命令行中进行操作，它们都只能通过网页在<code>Apps</code>菜单进行操作。</p>
+<h1 id="_15">服务器开发模式</h1>
+<p>在开启Odoo服务器实例时加上<code>--dev=all</code>选项可以开启开发模式。</p>
+<p>开发者模式为开发提供了一些便利的特性，最重要的两点是：</p>
+<ul>
+<li>只要有Python文件被保存，就会自动重新加载Python代码，免去了手动重启服务器的步骤</li>
+<li>直接从<code>XML</code>文件读取视图的定义，避免了手动更新模块</li>
+</ul>
+<p><code>--dev</code>选项可以接受一组以逗号分隔的选项，<code>all</code>适用于大部分时候。</p>
+	</article>
+
+	
+
+                </div>
+                <!-- end of page content -->
+
+                <!-- start of sidebar -->
+                <aside class="span4 page-sidebar">
+                	<section class="widget">
+                        <div class="support-widget">
+                            <h3 class="title">Hi there!</h3>
+                            <p class="intro">Hope you find something useful :)</p>
+                        </div>
+                	</section>
+                </aside>
+                <!-- end of sidebar -->
+            </div>
+        </div>
+    </div>
+    <!-- End of Page Container -->
+
+    <!-- Start of Footer -->
+    <footer id="footer-wrapper">
+        <!-- Footer Bottom -->
+        <div id="footer-bottom-wrapper">
+            <div id="footer-bottom" class="container">
+                <div class="row">
+                    <div class="span6">
+                        <p class="copyright">
+                            Copyright © 2017 Ruter. Site Generated 2017-05-25 14:10:41
+                        </p>
+                    </div>
+                    <div class="span6">
+                        <!-- Social Navigation -->
+                        <ul class="social-nav clearfix">
+                                <li class="linkedin"><a target="_blank" href="#"></a></li>
+                                <li class="stumble"><a target="_blank" href="#"></a></li>
+                                <li class="google"><a target="_blank" href="#"></a></li>
+                                <li class="deviantart"><a target="_blank" href="#"></a></li>
+                                <li class="flickr"><a target="_blank" href="#"></a></li>
+                                <li class="skype"><a target="_blank" href="skype:#?call"></a></li>
+                                <li class="rss"><a target="_blank" href="#"></a></li>
+                                <li class="twitter"><a target="_blank" href="#"></a></li>
+                                <li class="facebook"><a target="_blank" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Footer Bottom -->
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- script -->
+    <!-- <script type='text/javascript' src='/static/js/jquery-1.8.3.min.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.easing.1.3.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.liveSearch.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.form.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.validate.min.js'></script> -->
+    <script type="text/javascript">
+      (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+      })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+      
+      _st('install','oXs1TQsrB1oY4LHhr7nb','2.0.0');
+    </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="zh-CN"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="zh-CN"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="zh-CN"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="zh-CN"> <!--<![endif]-->
+<head>
+	<!-- META TAGS -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>解决JS浮点运算精度问题的一个方法 - Ruter's Knowledge Wiki</title>
+    <meta name="keywords" content="knowledge, wiki, python, Ruter"/>
+    <meta name="description" content="It's a knowledge management wiki."/>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+
+    <!-- Style Sheet-->
+    <link rel='stylesheet' id='bootstrap-css-css'  href='/static/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='responsive-css-css'  href='/static/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='main-css-css'  href='/static/css/main5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel="Stylesheet" type="text/css" href="/static/css/zenburn.css">
+    <!-- <link rel="Stylesheet" type="text/css" href="/static/css/monokai.css"> -->
+    <!-- <link rel='stylesheet' id='custom-css-css'  href='/static/css/custom5152.html?ver=1.0' type='text/css' media='all' /> -->
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+     <script src="js/html5.js"></script></script>
+    <![endif]-->
+</head>
+<body>
+	<!-- Start of Header -->
+	<div class="header-wrapper">
+        <header>
+            <div class="container">
+                <div class="logo-container">
+                    <!-- Website Logo -->
+                    <a href=""  title="Ruter's Knowledge Wiki">
+                            <img src="/static/images/logo.png" alt="Ruter's Knowledge Wiki">
+                    </a>
+                    <span class="tag-line">My personal knowledge management</span>
+                </div>
+                <!-- Start of Main Navigation -->
+                <nav class="main-nav">
+                    <div class="menu-top-menu-container">
+                        <ul id="menu-top-menu" class="clearfix">
+                            <li><a href="">Home</a></li>
+                            <li><a href="http://ruter.sundaystart.net">Blog</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End of Main Navigation -->
+            </div>
+        </header>
+	</div>
+	<!-- End of Header -->
+
+	<!-- Start of Search Wrapper -->
+	<!-- <div class="search-area-wrapper">
+        <div class="search-area container">
+            <h3 class="search-header">Wiki it!</h3>
+            <p class="search-tag-line">You can enter what you are looking for!</p>
+
+            <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+                    <input class="search-term required st-default-search-input" type="text" id="s" name="s" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Type your search terms here" title="* Please enter a search term!" />
+                    <input class="search-btn" type="submit" value="Search" />
+                    <div id="search-error-container"></div>
+            </form>
+        </div>
+	</div> -->
+	<!-- End of Search Wrapper -->
+
+	<!-- Start of Page Container -->
+    <div class="page-container">
+        <div class="container">
+            <div class="row">
+            	<!-- start of page content -->
+                <div class="span8 page-content">
+                	
+	<ul class="breadcrumb">
+		<li><a href="">Home</a><span class="divider">/</span></li>
+		
+	        
+		        
+		        	
+		        
+		        <li><a href="/#Web">Web</a> <span class="divider">/</span></li>
+	        
+	    
+      	<li class="active">解决JS浮点运算精度问题的一个方法</li>
+	</ul>
+
+	<article class=" type-post format-standard hentry clearfix">
+        <h1 class="post-title">解决JS浮点运算精度问题的一个方法</h1>
+
+        <div class="post-meta clearfix">
+                <span class="date">2017-03-14 17:31</span>
+                
+        </div><!-- end of post meta -->
+
+        <p>在 JS 中进行浮点运算会出现精度有误差的问题，例如：<code>1 - 0.9</code>会得出<code>0.09999999999999998</code>这样的结果。</p>
+<p>可是对整数进行运算就不会出现这种情况。根据这个特点我们可以对浮点数先进行处理后再运算，将浮点数乘以 10 的 n 次方，运算完成后再将结果除以 10 的 n 次方，其中 n 为对应浮点数小数位的位数：</p>
+<div class="hlcode"><pre><span class="kd">var</span> <span class="nx">formatFloat</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">dig</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">pow</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">dig</span><span class="p">));</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">dig</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">num</span> <span class="o">/</span> <span class="nx">pow</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">dig</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">num</span> <span class="o">*</span> <span class="nx">pow</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">num</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<blockquote>
+<p>注：<code>num</code>为要处理的数值，<code>dig</code>为小数点的位数</p>
+</blockquote>
+<p>对前面的例子进行计算：<code>formatFloat(formatFloat(1, 1) - formatFloat(0.9, 1), -1)</code>可以得出正确的结果 <code>0.1</code>。</p>
+	</article>
+
+	
+	<hr>
+	<div class="like-btn">
+	    <span class="tags">
+            <strong>Related:&nbsp;&nbsp;</strong>
+            
+            	<a href="/Web/how-to-call-methods-or-functions-in-iframe.html" rel="tag">调用iframe中的函数或方法</a>
+            
+	    </span>
+	</div>
+	
+
+                </div>
+                <!-- end of page content -->
+
+                <!-- start of sidebar -->
+                <aside class="span4 page-sidebar">
+                	<section class="widget">
+                        <div class="support-widget">
+                            <h3 class="title">Hi there!</h3>
+                            <p class="intro">Hope you find something useful :)</p>
+                        </div>
+                	</section>
+                </aside>
+                <!-- end of sidebar -->
+            </div>
+        </div>
+    </div>
+    <!-- End of Page Container -->
+
+    <!-- Start of Footer -->
+    <footer id="footer-wrapper">
+        <!-- Footer Bottom -->
+        <div id="footer-bottom-wrapper">
+            <div id="footer-bottom" class="container">
+                <div class="row">
+                    <div class="span6">
+                        <p class="copyright">
+                            Copyright © 2017 Ruter. Site Generated 2017-05-25 14:10:41
+                        </p>
+                    </div>
+                    <div class="span6">
+                        <!-- Social Navigation -->
+                        <ul class="social-nav clearfix">
+                                <li class="linkedin"><a target="_blank" href="#"></a></li>
+                                <li class="stumble"><a target="_blank" href="#"></a></li>
+                                <li class="google"><a target="_blank" href="#"></a></li>
+                                <li class="deviantart"><a target="_blank" href="#"></a></li>
+                                <li class="flickr"><a target="_blank" href="#"></a></li>
+                                <li class="skype"><a target="_blank" href="skype:#?call"></a></li>
+                                <li class="rss"><a target="_blank" href="#"></a></li>
+                                <li class="twitter"><a target="_blank" href="#"></a></li>
+                                <li class="facebook"><a target="_blank" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Footer Bottom -->
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- script -->
+    <!-- <script type='text/javascript' src='/static/js/jquery-1.8.3.min.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.easing.1.3.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.liveSearch.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.form.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.validate.min.js'></script> -->
+    <script type="text/javascript">
+      (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+      })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+      
+      _st('install','oXs1TQsrB1oY4LHhr7nb','2.0.0');
+    </script>
+</body>
+</html>
