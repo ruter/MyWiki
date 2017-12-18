@@ -12,7 +12,7 @@ tag: Javascript, JQuery, HTML, clickable
 
 ```html
 <tbody>
-  <tr class="clickable" data-href="http://ruter.sundaystart.net">
+  <tr class="clickable" data-href="http://blog.ruterly.com">
     <td></td>
     <td></td>
     <td></td>
